@@ -1,7 +1,7 @@
 .side-nav{
-    background-color: var(--blue-grey-dark);
-    flex: 0 12 20%;
-    height: 100vh;  
+    background-color: #01050d;
+    flex: 0 0 18%;
+    height: 100vh;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -15,9 +15,9 @@
 
     .nav-item{
         position: relative;
-
+    
         span{
-            font-size: 1rem;
+            font-size: .8rem;
         }
 
         &:not(:last-child){
@@ -25,7 +25,7 @@
         }
 
         &:hover{
-            color: #043346;
+            color: black;
         }
 
         &::before{
@@ -38,11 +38,11 @@
             background-color: var(--blue-grey-primary);
             transform: scaleY(0);
             transform-origin: left;
-            transition: transform .2s, width .4s cubic-bezier(1, -0.28, 0, 1) .2s
+            transition: transform .2s, width .3s cubic-bezier(1, -0.28, 0, 1) .2s
         }
 
         &:hover::before,
-        &:active::before{
+        &.nav-item--active::before{
             transform: scaleY(1);
             width: 100%;
         }
@@ -59,7 +59,11 @@
         flex-direction: column;
         position: relative;
         z-index: 1;
+        transition: color .2s .2s;
 
+        &:hover{
+            color:#60c9f5;
+        }
         
     }
 
@@ -70,19 +74,22 @@
     }
 
     & .user{
-
+        cursor: pointer;
     }
 
     & .legal{
-        font-size: 1rem;
+        font-size: .8rem;
         text-align: center;
-        padding: 2.5rem;
+        padding: 1.5rem;
         color: rgb(97, 94, 94);
     }
 
-    .logo{
-        width: 10rem;
+    & .logo{
+        width: 9rem;
         margin: 2rem auto 0 auto;
     }
-   
+   @media screen and (max-width: 600px) {
+        display:none;
+        
+   }
 }

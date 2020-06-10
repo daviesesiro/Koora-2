@@ -1,0 +1,42 @@
+button{
+    padding: .8rem 1rem;
+    display: inline-block;
+    margin: .5rem auto 0rem auto;
+    font-size: 0.8rem;
+    border: none;
+    outline:none;
+    border-bottom: 1px solid currentColor;
+    color: inherit;
+    font-weight: 600;
+    background-color: transparent;
+    cursor: pointer;
+    color: rgb(169, 170, 170);
+    transition: .2s;
+
+    &:hover{
+        color: #5eb8ff;
+        animation-name: pulsate;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+    }
+
+    &:focus{
+        outline:none;
+        
+    }
+}
+
+@keyframes pulsate{
+    0%{
+        transform: scale(1);
+        box-shadow: none;
+    }
+    50%{
+        transform: scale(1.005) translateY(-3px);
+        box-shadow: 0 1rem 4rem rgba(8, 177, 255, 0.25);
+    }
+    100%{
+        transform: scale(1);
+        box-shadow: none;
+    }
+}

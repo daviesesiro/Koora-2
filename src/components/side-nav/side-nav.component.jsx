@@ -17,7 +17,7 @@ const SideNav = () => {
                 <LogoSvg/>
             </div>
             <ul className="side-list">
-                <li className="nav-item">
+                <li className="nav-item nav-item--active">
                     <Link to="/" className='nav-link'>
                         <HomeSvg className='svg-icon' />
                         <span>Home</span>

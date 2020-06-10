@@ -42,7 +42,7 @@ html{
 }
 
 body{
-  font-family:'Patrick Hand', 'Open Sans',sans-serifs;
+  font-family:'Open Sans',sans-serifs;
   font-weight: 400;
   line-height: 1.6;
   color: var(--grey-primary);
