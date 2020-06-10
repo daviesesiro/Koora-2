@@ -1,5 +1,9 @@
+.app{
+  max-width: 100%;
+  margin: 0rem auto;
+  background-color: #d0d7e7;
+}
 
-.App {
-  text-align: center;
-  font-family: 'Pragati Narrow', sans-serif;
+.content{
+  display: flex;
 }

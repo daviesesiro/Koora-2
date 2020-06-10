@@ -1,13 +1,54 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+ /* primary - #0288d1 */
+ /* light - #5eb8ff */
+ /* dark - #005b9f */
+
+ /* blue greycolor primary - #263238 */
+ /* dark blue grey color - #000a12 */
+ /* blue gry light - #4f5b62 */
+
+ /* grey primary - #212121
+ grey dark - #000000
+ grey ligth - #484848 */
+
+ :root{
+   --color-primary: #0288d1;
+   --color-primary-light: #5eb8ff;
+   --color-primary-dark: #005b9f;
+
+  --blue-grey-primary: #263238 ;
+  --blue-grey-dark: #000a12;
+  --blue-grey-light:#4f5b62;
+
+  --grey-primary: #212121;
+  --grey-lighter : ##d5e2ff;
+  --grey-dark: #000000;
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*{
+  margin: 0;
+  padding: 0;
 }
+
+*,
+*::before,
+*::after{
+  box-sizing:inherit;
+}
+
+html{
+  box-sizing: border-box;
+  font: 62.5%;
+}
+
+body{
+  font-family:'Patrick Hand', 'Open Sans',sans-serifs;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--grey-primary);
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  height: 100vh;
+}
+

@@ -1,7 +1,11 @@
 import React from 'react';
 
-const HomePage = () => (
-    <h1>Home Page</h1>
+import './home.styles.scss';
+
+export const HomePage = () => (
+    <div className='home'>
+        Home
+    </div>
 );
 
 export default HomePage;
