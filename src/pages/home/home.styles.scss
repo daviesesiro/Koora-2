@@ -1,5 +1,5 @@
 .home{
-    background-color: white;//linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
+    background-color: white;//
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -49,7 +49,7 @@
         @media screen and (max-width: 800px){
             h1{
                 margin-top: 0rem;
-                font-size: 1.8rem;
+                // font-size: 1.8rem;
                 text-align: left;
                 font-weight: 600;
             }
@@ -60,12 +60,14 @@
         
 
             .text-content{
-                flex: 0 0 50%;
+                flex: 1;
+                
                 text-align: left;
                 line-height: 2rem;
+                list-style: inside;
             }
             .image-content{
-                flex:1;
+                flex:1 0;
 
                 img{
                     width: 100%;

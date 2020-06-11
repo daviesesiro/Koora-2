@@ -1,9 +1,18 @@
 .app{
-  max-width: 100%;
   margin: 0rem auto;
-  background-color: #d0d7e7;
+  background: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
 }
 
-.content{
+.content{ 
   display: flex;
+  position: relative;
+  max-width: 100rem;
+  margin: auto;
+}
+
+@media screen and (max-width:500px){
+  .content{
+    margin-top:3rem;
+  }
+  
 }

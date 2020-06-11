@@ -1,6 +1,7 @@
 .side-nav{
     background-color: #01050d;
     flex: 0 0 18%;
+    min-width: 12%;
     height: 100vh;
     display: flex;
     justify-content: space-between;
@@ -49,7 +50,9 @@
     }
 
     .nav-link:link,
-    .nav-link:visited{
+    .nav-link:visited,
+    .user-pop:link,
+    .user-pop:visited{
         text-decoration: none;
         color: #edf6ff;
         text-transform: uppercase;
@@ -64,6 +67,7 @@
         &:hover{
             color:#60c9f5;
         }
+        
         
     }
 
@@ -88,7 +92,7 @@
         width: 9rem;
         margin: 2rem auto 0 auto;
     }
-   @media screen and (max-width: 600px) {
+   @media screen and (max-width: 500px) {
         display:none;
         
    }

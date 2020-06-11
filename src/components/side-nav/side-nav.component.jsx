@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Link } from 'react-router-dom';
 import { ReactComponent as HomeSvg } from '../../svgicon/home.svg';
@@ -10,7 +10,6 @@ import { ReactComponent as LogoSvg } from '../../svgicon/KooraLogoWeb.svg';
 import './side-nav.styles.scss';
 
 const SideNav = () => {
-    const [showDrop, setShowDrop] = useState(false);
     return (
         <nav className='side-nav'>
             <div className='logo'>
@@ -47,7 +46,10 @@ const SideNav = () => {
             </ul>
 
             <div className="user">
-                <UserSvg className='svg-icon'/>
+                <a className='user-pop' href="#loginPopup">
+                    <UserSvg className='svg-icon' />
+                    <span>Login</span>
+                </a>
             </div>
 
             <div className="legal">

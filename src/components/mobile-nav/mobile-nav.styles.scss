@@ -2,6 +2,7 @@
     text-decoration: none;
     color: transparent;
     display: flex;
+    align-items: center;
     position: fixed;
     left:0;
     width: 100%;
@@ -14,9 +15,6 @@
 .bottom-nav{
     bottom: 0;
     justify-content: space-around;
-    // box-shadow:0px 0px 8px 5px #080f1f;
-
-    color: red;
     svg{
         fill: #768a92;
     }
@@ -29,6 +27,19 @@
     color: rgb(58, 113, 175);   
     font-family: 'Anton', sans-serif;
     letter-spacing: .8rem;
+}
+
+.user-pop{
+    display: flex;
+    margin-left: auto;
+    justify-content: flex-end;
+    align-items: center;
+    color: #768a92;
+    text-decoration: none;
+    letter-spacing: normal;
+    svg{
+        fill: #768a92;
+    }
 }
 
 @media screen and (min-width:500px){
