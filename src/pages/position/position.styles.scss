@@ -1,0 +1,27 @@
+.position-page{
+    background-color: white;
+    height: 100%;
+    overflow-y: scroll;
+    padding-top: 1rem;
+
+    @media screen and (max-width:800px){
+        padding: 3rem 0 5rem 0;
+    }
+    .position-event-name{
+        text-align: center;
+    }
+
+    .position-items{
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
+        max-width: 75%;
+        margin: 5rem auto 0rem;   
+
+        
+        div{
+            margin-bottom:4rem;
+            max-height: 10rem;
+        }
+    }
+}

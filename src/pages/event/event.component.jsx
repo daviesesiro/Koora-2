@@ -1,10 +1,18 @@
 import React from 'react';
 
+import { Switch, Route } from 'react-router-dom';
+import EventsPage from '../events/events.component';
+import PositionsPage from '../position/position.component';
+import NomineesPage from '../nominee/nominee.component';
 import './event.styles.scss';
-const EventPage = () => (
-    <div className="event-page">
-        sdfs Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa sequi deserunt laboriosam repudiandae similique dignissimos doloribus veniam provident vel quaerat deleniti odit debitis dolorem qui culpa, ut quis alias voluptatum.
+const Event = () => (
+    <div className="event">
+        <Switch>
+            <Route exact path='/events' component={EventsPage}/>
+            <Route exact path='/events/:eventId' component={PositionsPage} />
+            <Route path='/events/:eventId/:positionId' component={NomineesPage} />
+        </Switch>
     </div>
 );
 
-export default EventPage;
+export default Event;

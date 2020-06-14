@@ -1,0 +1,40 @@
+.event-item{
+    position: relative;
+    border: 2px solid rgba(55, 156, 224, 0.658);
+    border-radius: .5rem;
+    overflow: hidden;
+    box-shadow: 1px 8px 20px 6px rgba(0, 0, 0, 0.795);
+    transition: all 2s;
+
+    &:hover > .event-content{
+        background-color: rgba(0, 0, 0, 0.788);
+    }
+    
+    .event-image{
+        width: 100%;
+        background-image: url('/security.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 100%;
+    }
+
+    .event-content{
+        position: absolute;
+        bottom:0;
+        left: 0;
+        padding: 0 .8rem;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.438);
+        color: rgb(207, 226, 231);
+        transition: 1s;
+        
+        .event-name{
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .event-created-date , .event-end-date{
+            color: white;
+        }
+    }
+}
