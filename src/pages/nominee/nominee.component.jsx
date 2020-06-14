@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './nominee.styles.scss';
+
 const NomineesPage = ({history}) => (
     <div className='nominee-page'>
         <div className='nav-back'>
