@@ -7,6 +7,7 @@ import LoginPopup from './components/login-popup/login-popup.component';
 import AboutPage from './pages/about/about.component';
 import HomePage from './pages/home/home.component';
 import EventPage from './pages/event/event.component';
+import ProfilePage from './pages/profile/profile.component';
 import './App.css';
 
 class App extends React.Component{
@@ -21,7 +22,8 @@ class App extends React.Component{
           <Switch>
             <Route exact path='/' component={HomePage}/>
             <Route exact path='/about' component={AboutPage}/>
-            <Route path='/' component={EventPage}/>
+            <Route path='/events' component={EventPage}/>
+            <Route path='/profile' component={ProfilePage}/>
           </Switch>
         </div>
       </div>

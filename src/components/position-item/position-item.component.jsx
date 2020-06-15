@@ -7,7 +7,7 @@ const PositionItem = () => (
         <div className='position-name'>
             <span>First Event of the year</span>
         </div>
-        <p className='position-votes'>0</p>
+        <p className='position-votes'>340</p>
     </div>
 );
 

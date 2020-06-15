@@ -1,5 +1,7 @@
 import React from 'react';
 
+import NomineeItem from '../../components/nominee-item/nominee-item.component';
+
 import './nominee.styles.scss';
 
 const NomineesPage = ({history}) => (
@@ -7,9 +9,15 @@ const NomineesPage = ({history}) => (
         <div className='nav-back'>
             <span onClick={()=> history.push('/events/1')}>{'<<<<'}</span>
         </div>
-        <h1>Nominee</h1>
-        <h1>Nominee</h1>
-        <h1>Nominee</h1>
+        <div className='position-title'>
+            Freshes fresher
+        </div>
+        <div className='nominee-items'>
+            <NomineeItem/>
+            <NomineeItem/>
+            <NomineeItem/>
+            <NomineeItem/>
+        </div>
     </div>
 );
 

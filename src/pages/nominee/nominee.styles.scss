@@ -2,4 +2,26 @@
     background-color: white;
     height: 100%;
     overflow-y: scroll;
+
+    .position-title{
+        text-align: center;
+        margin-bottom: 3rem;
+        font-size: 3rem;
+    }
+    .nominee-items{
+        max-width: 80%;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6rem;
+        grid-auto-rows: minmax(25rem, auto);
+
+        @media screen and (max-width:800px){
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media screen and (max-width:500px){
+            grid-template-columns: repeat(1, 1fr);
+            gap:8rem 0;
+        }
+    }
 }
