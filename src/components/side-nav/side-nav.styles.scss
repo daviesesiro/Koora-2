@@ -79,6 +79,16 @@
 
     & .user{
         cursor: pointer;
+        font-size: .6rem;
+        color: #edf6ff;
+        text-transform: uppercase;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+        z-index: 1;
+        transition: color .2s .2s;
     }
 
     & .legal{

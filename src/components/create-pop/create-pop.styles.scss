@@ -1,0 +1,38 @@
+.create-pop{
+    position: absolute;
+    display: none;
+    width: 80%;
+    height: 80%;
+    background-color: #030c1dfd;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.267);
+    z-index: 40;
+
+    .container{
+        color: white;
+
+        .create-content{
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .next{
+            cursor: pointer;
+            position: absolute;
+            right: 2rem;
+            top: 1rem;
+            margin: 0 auto;
+        }
+
+        .close{
+            cursor: pointer;
+            position: absolute;
+            left: 1rem;
+            font-size: 2rem;
+
+        }
+    }
+}

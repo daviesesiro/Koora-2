@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 
+import {auth} from '../../firebase/firebase.utils';
+
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 
 import './sign-in.styles.scss'
 
-const SignIn = () => {
+const SignIn = ({showPop}) => {
     const [userCredientials, setCredentials] = useState({
         email:'', 
         password: ''
@@ -15,6 +17,12 @@ const SignIn = () => {
 
     const handleSubmit = async event => {
         event.preventDefault();
+        try {
+            const { user } = await auth.signInWithEmailAndPassword(email, password);
+            showPop();
+        } catch (error) {
+            console.log(error.message);
+        }
     };
 
     const handleChange = event => {

@@ -2,15 +2,15 @@ import React from 'react';
 
 import './event-item.styles.scss';
 
-const EventItem = ({handleClick}) => (
+const EventItem = ({handleClick, name, end_at,start_at}) => (
     <div className='event-item' onClick={handleClick}>
         <div className='event-image'>
             
         </div>
         <div className='event-content'>
-            <p className='event-name'>Freshes fresher</p>
-            <span className='event-created-date'>Starts: Tomomor</span><br/>
-            <span className='event-end-date'>Ends: today</span>
+            <p className='event-name'>{name}</p>
+            <span className='event-created-date'>Started at: {new Date(start_at.seconds*1000).toDateString()}</span><br/>
+            <span className='event-end-date'>ending at: {new Date(end_at.seconds*1000).toDateString()}</span>
         </div>
     </div>
 );

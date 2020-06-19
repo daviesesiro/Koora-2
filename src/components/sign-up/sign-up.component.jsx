@@ -4,16 +4,16 @@ import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 
 import './sign-up.styles.scss'
+import { auth } from '../../firebase/firebase.utils';
 
-const SignUp = ({signUpStart}) => {   
+const SignUp = () => {   
     const [userCredentials, setUserCredentials] = useState({
-        displayName: '',
         email:'',
         password: '',
         confirmPassword: ''
     });
     
-    const {displayName, email, password, confirmPassword} = userCredentials;
+    const {email, password, confirmPassword} = userCredentials;
 
     const handleSubmit = async event =>{
         event.preventDefault();
@@ -23,7 +23,13 @@ const SignUp = ({signUpStart}) => {
             alert("passwords don't match");
             return;
         }
-        signUpStart(displayName, email, password);
+        
+        try{
+            const { user } = await auth.createUserWithEmailAndPassword(email, password);
+            console.log('created user', user);
+        }catch(error){
+            console.log(error.message);
+        }
     }
 
     const handleChange = event =>{
@@ -37,14 +43,6 @@ const SignUp = ({signUpStart}) => {
             <h4>Sign up with your email and password</h4>
 
             <form className="sign-up-form" onSubmit={handleSubmit}>
-                <FormInput
-                    type="text"
-                    name="displayName"
-                    value={displayName}
-                    onChange = {handleChange}
-                    label="Display Name"
-                    required
-                />  
                 <FormInput
                     type="email"
                     name="email"

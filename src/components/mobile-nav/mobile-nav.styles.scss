@@ -1,6 +1,5 @@
 .nav{
     text-decoration: none;
-    color: transparent;
     display: flex;
     align-items: center;
     position: fixed;
@@ -10,9 +9,13 @@
     fill: #768a92;
     padding: 0.5rem;
     z-index: 200;
-
+    
 }
-.bottom-nav{
+.logo:link, .logo:visited{
+    text-decoration: none;
+    color: rgb(58, 113, 175);   
+}
+.bottom-nav, logoSvg{
     bottom: 0;
     justify-content: space-around;
     svg{
