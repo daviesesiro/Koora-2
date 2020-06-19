@@ -15,10 +15,10 @@ import { ReactComponent as UserSvg } from '../../svgicon/user.svg';
 
 import './mobile-nav.styles.scss';
 
-const MobileNav = ({ toggleLoginPopUp, pop, currentUser }) => (
+const MobileNav = ({ toggleLoginPopUp, loginPopState, currentUser }) => (
     <div className='mobile-nav'>
         {
-            (pop) ? <LoginPopup/> : null
+            (loginPopState) ? <LoginPopup/> : null
         }
         <div className='nav top-nav'>
             <Link to='/' className='logo'><p>Koora</p></Link>           
@@ -32,11 +32,13 @@ const MobileNav = ({ toggleLoginPopUp, pop, currentUser }) => (
             <Link to='/events'><EventSvg /></Link> 
             <Link to='/place'><PlaceSvg /></Link> 
             {
+                
                 !currentUser ?
                     <UserSvg onClick={() => toggleLoginPopUp()}/>
                     :
                     <Link to='/profile'><UserSvg /></Link>
             }
+            {console.log(currentUser)}
         </div>
         
     </div>

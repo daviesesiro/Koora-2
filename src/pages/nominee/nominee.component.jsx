@@ -11,7 +11,7 @@ const NomineesPage = ({ history, match, setNominees, Nominees }) => {
         let nominees = [];
         db.collection('nominee').where('positionId', "==", `${match.params.positionId}`).get().then(snapshot => {
             snapshot.docs.forEach((doc) => {
-                nominees.push({...nominees, id: doc.id, ...doc.data()})
+                nominees.push({id: doc.id, ...doc.data()})
             })
             setNominees(nominees);
         })

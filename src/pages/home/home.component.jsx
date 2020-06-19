@@ -8,9 +8,8 @@ export const HomePage = () => (
         <div className='content-container'>
             <div className='slider-img'>    
                 <SliderItem className='slider-item'/>    
-                <img src="ballot.jpg" alt="hero"/>
             </div> 
-            <div className='overview'>                
+            {/* <div className='overview'>                
                 <h1 className='text-head'>Robust security measures you can rely on.</h1>
                 <div className='overview-content'>
                     <div className='text-content'>
@@ -27,7 +26,7 @@ export const HomePage = () => (
                         <img src="security.jpg" alt="security"/>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     </div>
 );

@@ -2,6 +2,7 @@ import userActionTypes from './user.types';
 
 const INITIAL_STATE = {
     currentUser: null,
+    events: [],
     showPop: false
 }
 
@@ -11,6 +12,12 @@ export const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state, 
                 currentUser: action.payload,
+                showPop: false
+            };
+        case userActionTypes.SET_USER_EVENTS:
+            return {
+                ...state, 
+                events: action.payload,
                 showPop: false
             };
         case userActionTypes.POP_SHOW:

@@ -20,7 +20,7 @@ const EventsPage = ({ history, match, pageEvents, setEvents }) => {
         let events = [];
         db.collection('events').get().then((snapshot) => {
             snapshot.docs.forEach((doc) => {
-                events.push({ ...events, id: doc.id, ...doc.data() });
+                events.push({id: doc.id, ...doc.data() });
             })
             setEvents(events);
         });

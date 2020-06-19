@@ -12,7 +12,7 @@ const PositionsPage = ({ history, match, setPosition, positions }) => {
         const positions = [];
         db.collection('positions').where('eventId', '==', `${match.params.eventId}`).get().then((snapShot) => {
             snapShot.docs.forEach(position => {
-                positions.push({...positions, id: position.id, ...position.data() })
+                positions.push({id: position.id, ...position.data() })
             });
             setPosition(positions);
         });

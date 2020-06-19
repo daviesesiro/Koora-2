@@ -1,13 +1,13 @@
 .profile-page{
     width:100%;
-    height: 100%;
+    height: 100vh;
     overflow-y: scroll;
     padding: 5rem 0;
     background-color:white;
 
     .top-content{
-        margin: 0 auto;
-        width: 80;
+        margin: 2rem auto 4rem auto;
+        width: 80%;
     }
     .add-event-toggle{
         display: inline-block;
