@@ -54,20 +54,28 @@ const SideNav = ({ loginPopState, toggleLoginPopUp, currentUser }) =>{
                         <span>About</span>
                     </Link>
                 </li>
-            </ul>
-
-            <div className="user">
-                <UserSvg className='svg-icon' onClick={() => { toggleLoginPopUp(); console.log('clicked') }} />
-                {
-                    !currentUser ? <span>Login</span>
-                        : <span>
-                            <Link className='nav-link' to='/profile'>
-                                {currentUser.email}
-                            </Link>
-                        </span>
-                }
+            </ul>            
+            
+            {
+                
+                currentUser ? (
+                    <div className="user"> 
+                        <Link className='nav-link' to='/profile'>
+                            <UserSvg className='svg-icon' />
+                            <span> {currentUser.email}</span>
+                        </Link>
+                    </div>
+                    ) 
+                    : 
+                        (<div className='user' onClick={() => { toggleLoginPopUp(); console.log('clicked') }}>
+                            <UserSvg className='svg-icon' />
+                            <span>Login</span>
+                        </div>)
+                
+            }
+            
                     
-            </div>
+            
 
             <div className="legal">
                 &copy; {new Date().getFullYear()} by Davies Esiro. All rights reserved.

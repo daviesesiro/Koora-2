@@ -10,7 +10,8 @@ const SignUp = () => {
     const [userCredentials, setUserCredentials] = useState({
         email:'',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        error: ''
     });
     
     const {email, password, confirmPassword} = userCredentials;
@@ -28,7 +29,7 @@ const SignUp = () => {
             const { user } = await auth.createUserWithEmailAndPassword(email, password);
             console.log('created user', user);
         }catch(error){
-            console.log(error.message);
+            setUserCredentials({...userCredentials, error: error.message})
         }
     }
 
@@ -69,6 +70,7 @@ const SignUp = () => {
                 />
                 <Button type='submit'>SIGN UP</Button> 
             </form>
+            <p style={{ color:'rgb(100,0,0)' }}>{userCredentials.error}</p>
         </div>
     )
 }

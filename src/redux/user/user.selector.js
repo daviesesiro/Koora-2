@@ -9,7 +9,7 @@ export const selectCurrentUser = createSelector(
 
 export const selectUserEvents = createSelector(
     [selectUser],
-    user => user.events
+    user => user ? user.events : []
 );
 
 export const selectPop = createSelector(

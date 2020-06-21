@@ -12,21 +12,28 @@ import HomePage from './pages/home/home.component';
 import EventPage from './pages/event/event.component';
 import ProfilePage from './pages/profile/profile.component';
 import CreatePop from './components/create-pop/create-pop.component';
+import Spinner from './components/spinner/spinner.component';
+
 import './App.css';
 
 class App extends React.Component{
+  state = {
+    loading: true
+  }
+
   unsubscribe = null;
   componentDidMount() {
     const { setUser } = this.props;
 
-    this.unsubscribe = auth.onAuthStateChanged(user => {      
-      const newUser = {email: user.email, userId: user.uid}
+    auth.onAuthStateChanged(user => {      
+      const newUser = user ? { email: user.email, userId: user.uid } : null;
+      console.log(newUser);
       setUser(newUser);
-      this.unsubscribe()
+      this.setState({loading: false})
     });
   }
   render() {
-
+    if(this.state.loading) return <Spinner/>
     return (
       <div id='top' className='app'>
         <div className='content'>

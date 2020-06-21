@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import 'firebase/functions';
 import 'firebase/firestore';
 import 'firebase/auth';
 
@@ -12,8 +13,8 @@ const config = {
     appId: "1:133440072249:web:8cc319c96fe5df33ea3be8",
     measurementId: "G-BKTD60QWVQ"
 };
-
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
 export const db = firebase.firestore();
+export const functions = firebase.functions();

@@ -7,28 +7,28 @@ import Button from '../button/button.component';
 
 import './sign-in.styles.scss'
 
-const SignIn = ({showPop}) => {
-    const [userCredientials, setCredentials] = useState({
+const SignIn = () => {
+    const [userCredentials, setCredentials] = useState({
         email:'', 
-        password: ''
+        password: '',
+        error: ''
     });
 
-    const {email, password} = userCredientials;
+    const {email, password} = userCredentials;
 
     const handleSubmit = async event => {
         event.preventDefault();
         try {
-            const { user } = await auth.signInWithEmailAndPassword(email, password);
-            showPop();
+            await auth.signInWithEmailAndPassword(email, password);
         } catch (error) {
-            console.log(error.message);
+            setCredentials({...userCredentials, error: error.message });
         }
     };
 
     const handleChange = event => {
         const {value, name} = event.target;
 
-        setCredentials({...userCredientials, [name]:value});
+        setCredentials({...userCredentials, [name]:value});
     };
 
     return (
@@ -58,6 +58,7 @@ const SignIn = ({showPop}) => {
                         <Button>Google sign in</Button>
                     </div>
                 </form>
+                <p style={{ color:'rgb(100,0,0)' }}>{userCredentials.error}</p>
             </div>
     );
     

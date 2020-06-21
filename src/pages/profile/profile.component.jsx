@@ -36,6 +36,7 @@ class ProfilePage extends React.Component {
                     <div className='add-event-toggle'>
                         +
                     </div>
+                    <div onClick={()=>auth.signOut()} >Logout out</div>
                 </div>
                 <div className='event-items'>
                     {
