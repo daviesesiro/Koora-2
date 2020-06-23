@@ -31,14 +31,12 @@ const MobileNav = ({ toggleLoginPopUp, loginPopState, currentUser }) => (
             <Link to='/'><HomeSvg /></Link> 
             <Link to='/events'><EventSvg /></Link> 
             <Link to='/place'><PlaceSvg /></Link> 
-            {/* {
-                
+            {                
                 !currentUser ?
                     <UserSvg onClick={() => toggleLoginPopUp()}/>
                     :
                     <Link to='/profile'><UserSvg /></Link>
-                } */}
-            {console.log(currentUser)}
+                }
         </div>
         
     </div>

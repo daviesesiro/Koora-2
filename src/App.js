@@ -37,6 +37,7 @@ class App extends React.Component{
     return (
       <div id='top' className='app'>
         <div className='content'>
+          
           <CreatePop/>
           <SideNav />
           <MobileNav />

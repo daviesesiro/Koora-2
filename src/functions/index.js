@@ -40,10 +40,10 @@ exports.voteNominee = functions.https.onRequest((req, res) => (
         const userRef = admin.firestore().collection('users').doc(userId);
         const userSnap = await userRef.get();
 
-        if (!userSnap.exists) return res.status().json({ message: 'not an authenticated user' });
+        if (!userSnap.exists) return res.json({ message: 'not an authenticated user' });
 
         //throwing error user has already voted in that position
-        if (userSnap.data().votedFor.includes(positionId)) return res.status(401).json({ message: 'You have already voted for this position' });
+        if (userSnap.data().votedFor.includes(positionId)) return res.json({ message: 'You have already voted for this position' });
         
         //updating user
         await userRef.update({
@@ -66,12 +66,18 @@ exports.voteNominee = functions.https.onRequest((req, res) => (
     })
 ));
 
-// auth trigger
+// auth trigger register user in firestore
 exports.newUserSignUp = functions.auth.user().onCreate(user => {
     // for background triggers you must return a value/promise
     return admin.firestore().collection('users').doc(user.uid).set({
         email: user.email,
         votedFor: []
     })
+});
+
+// auth trigger (user deleted)
+exports.userDeleted = functions.auth.user().onDelete(user => {
+    const doc = admin.firestore().collection('users').doc(user.uid);
+    return doc.delete();
 });
 

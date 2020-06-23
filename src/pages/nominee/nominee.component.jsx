@@ -1,64 +1,96 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { db } from '../../firebase/firebase.utils';
-import NomineeItem from '../../components/nominee-item/nominee-item.component';
 
-import './nominee.styles.scss';
+import { ReactComponent as NavBack } from '../../svgicon/back.svg';
+import NomineeItem from '../../components/nominee-item/nominee-item.component';
+import { toast,ToastContainer } from 'react-toastify';
 import Spinner from '../../components/spinner/spinner.component';
+import Axios from 'axios';
+import { showPop } from '../../redux/user/user.actions';
+
+import 'react-toastify/dist/ReactToastify.css';
+import './nominee.styles.scss';
 
 class NomineesPage extends React.Component {
     state = {
-        loading: true
+        loading: true,
+        isDisabled: false
+    }
+
+    unsubscribe = null;
+
+    handleVote = (id) => {
+        this.setState({ isEnabled: true });
+        const { currentUser, match, toggleLoginPop } = this.props;
+        if (!currentUser) return toggleLoginPop();
+        Axios.post('https://us-central1-koora-e1eb5.cloudfunctions.net/voteNominee', {
+            userId: currentUser.userId,
+            nomineeId: id,
+            positionId: match.params.positionId
+        }).then((res) => {
+            console.log(res);
+            this.setState({ isEnabled: false });
+            toast.info(res.data.message, {
+                position: toast.POSITION.TOP_CENTER                
+            });
+            
+        }).catch((error) => {
+            console.log(error)
+        })       
+    
     }
     getData() {
-        this.setState({ loading: true });
-        
+        this.setState({ loading: true });        
         const {match, setNominees} = this.props;
-        let nominees = [];
-        db.collection('nominees').where('positionId', "==", `${match.params.positionId}`).get().then(snapshot => {
-            snapshot.docs.forEach((doc) => {
-                nominees.push({ id: doc.id, ...doc.data() })
-            })            
-            setNominees(nominees);
+        
+        this.unsubscribe = db.collection('nominees').where('positionId', "==", `${match.params.positionId}`).onSnapshot(snapshot => {  
+            setNominees(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
             this.setState({ loading: false });
         });
     }
+
     componentDidMount() {
         this.getData();
     }
+
+    componentWillUnmount() {
+        this.unsubscribe();
+    }
+
     render() {
         const { history, Nominees } = this.props;
+        const { isEnabled, loading } = this.state;
 
-        if (this.state.loading) return <Spinner />
-        
+        if (loading) return <Spinner />
         return(
-        <div className='nominee-page'>
-            <div className='nav-back'>
-                <span onClick={()=> history.goBack()}>{'<<<<'}</span>
-            </div>
-            <div className='position-title'>
-                Freshes fresher
-            </div>
-                <div className='nominee-items'>
+            <div className='nominee-page'>
+                <ToastContainer autoClose={2000} />
+                <div className='top-content'>
+                    <NavBack className='nav-back' onClick={()=> history.goBack()}/>
+                    <h1 className='position-title'>Nominees</h1>
+                </div>
+                    <div className='nominee-items'>
                     {
                         Nominees.map((nominee) => (
-                            <NomineeItem key={nominee.id} nominee={nominee}/>
+                            <NomineeItem isEnabled={isEnabled} handleVote={this.handleVote} key={nominee.id} nominee={nominee}/>
                         ))
                     }
+                </div>
             </div>
-        </div>
         );        
     }
 
 }
 
 const mapStateToProps = (state) => ({
-    Nominees: state.event.nominees
+    Nominees: state.event.nominees,
+    currentUser: state.user.currentUser
 });
 
 const mapDispatchToProps = dispatch => ({
-    setNominees: nominees => dispatch({ type: 'SET_NOMINEES', payload: nominees })
+    setNominees: nominees => dispatch({ type: 'SET_NOMINEES', payload: nominees }),
+    toggleLoginPop: () => dispatch(showPop())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NomineesPage);

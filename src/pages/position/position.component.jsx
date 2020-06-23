@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { db } from '../../firebase/firebase.utils';
 
+import { ReactComponent as NavBack } from '../../svgicon/back.svg';
 import Spinner from '../../components/spinner/spinner.component';
 import PositionItem from '../../components/position-item/position-item.component';
 
@@ -35,9 +36,11 @@ class PositionsPage extends React.Component{
         
         return (
             <div className='position-page'>
-                <h1 onClick={()=>this.getData()}>.........remout......</h1>
-                <span onClick={()=> history.goBack()}>{'<<<<'}</span>
-                <h1 className='position-event-name'>First Event of the year</h1>
+                <div className='top-content'>
+                    <NavBack className='nav-back' onClick={()=> history.goBack()}/>
+                    <h1 className='position-event-name'>Positions</h1>
+                </div>
+
                 <div className='position-items'>
                     {
                         positions.map(({id, ...otherProps}) =>(

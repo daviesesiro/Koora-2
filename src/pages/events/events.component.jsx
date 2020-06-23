@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { db } from '../../firebase/firebase.utils';
 import { setEvents } from '../../redux/event/event.actions';
 
+import { ReactComponent as RefreshSvg } from '../../svgicon/refresh.svg';
 import Spinner from '../../components/spinner/spinner.component';
 import FormInput from '../../components/form-input/form-input.component';
 import EventItem from '../../components/event-item/event-item.component';
@@ -14,7 +15,8 @@ class EventsPage extends React.Component{
         searchField: ''
     }
 
-    getData(){
+    getData() {
+        this.setState({loading:true})
         const {setEvents } = this.props;    
         let events = [];
         db.collection('events').get().then((snapshot) => {
@@ -50,10 +52,13 @@ class EventsPage extends React.Component{
         
         return (
             <div className="events-page">
-                <div className='event-content-all'>
-                    <div className='search'>
-                        <FormInput handleChange={(e)=>this.handleChange(e)} label="Search Events..." value={this.state.searchField} />
-                    </div>
+                <div className='event-content-all'>  
+                    <div className='top-content'>
+                        <RefreshSvg onClick={()=> this.getData()} className='refresh-svg'/>
+                        <div className='search'>                        
+                            <FormInput handleChange={(e)=>this.handleChange(e)} label="Search Events..." value={this.state.searchField} />
+                        </div>
+                    </div>    
 
                     <div className='event-items'>
                         {
