@@ -1,9 +1,9 @@
 import eventActionTypes from './event.types';
 
 const INITIAL_STATE = {
-    events: [],
-    positions: [],
-    nominees: []
+    events: null,
+    positions: null,
+    nominees: null
 };
 
 export const eventReducer = (state = INITIAL_STATE, action)=>{
