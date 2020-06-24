@@ -15,11 +15,58 @@
     text-decoration: none;
     color: rgb(58, 113, 175);   
 }
-.bottom-nav, logoSvg{
+.bottom-nav{
     bottom: 0;
     justify-content: space-around;
+    flex:1;
     svg{
-        fill: #768a92;
+        fill: rgb(65, 106, 153);
+    }
+
+    .logoSvg:link,.logoSvg:active,.logo:focus, .logo::after{ 
+        cursor: none; 
+        display: flex;
+        justify-content: center;
+        margin-right: 1rem;
+        padding: .4rem;
+        border-radius: 40%;
+        width: 5rem;
+        transition: .5s;
+        border: unset;
+        outline: unset;
+        color: unset;
+
+        &:last-child{
+            margin-right: 0;
+        }
+
+        &:hover{
+            background-color: var(--blue-grey-primary);
+        }
+    }
+    .active-nav{
+        background-color: var(--blue-grey-primary);
+        
+        animation-fill-mode: both;
+        svg{
+            fill: rgb(109, 136, 194);
+            animation: updown 2s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes updown {
+            0%, 100%{
+                transform: translateX(-2px);
+            }
+            25%{
+                transform:scale(1.2);
+            }
+            75%{
+                transform: scale(.8);;
+            }
+            50%{
+                transform: translateX(5px);
+            }
+        }
     }
     
 }

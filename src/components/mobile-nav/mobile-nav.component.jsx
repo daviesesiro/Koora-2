@@ -21,20 +21,20 @@ const MobileNav = ({ toggleLoginPopUp, loginPopState, currentUser }) => (
             (loginPopState) ? <LoginPopup/> : null
         }
         <div className='nav top-nav'>
-            <NavLink to='/' className='logo'><p>Koora</p></NavLink>           
+            <NavLink exact activeClassName='active-nav' to='/' className='logo'><p>Koora</p></NavLink>           
             <div className='user-pop'>
                 <NavLink to='/about'><AboutSvg className='svg-icon' /></NavLink>               
             </div>
         </div>
         <div className='nav bottom-nav'>
-            <NavLink to='/'><HomeSvg /></NavLink> 
-            <NavLink to='/events'><EventSvg /></NavLink> 
-            <NavLink to='/place'><PlaceSvg /></NavLink> 
+            <NavLink exact activeClassName='active-nav' className='logoSvg' to='/'><HomeSvg /></NavLink> 
+            <NavLink exact activeClassName='active-nav' className='logoSvg' to='/events'><EventSvg /></NavLink> 
+            <NavLink exact activeClassName='active-nav' className='logoSvg' to='/place'><PlaceSvg /></NavLink> 
             {                
                 !currentUser ?
-                    <UserSvg onClick={() => toggleLoginPopUp()}/>
+                    <UserSvg activeClassName='active-nav' className='logoSvg' onClick={() => toggleLoginPopUp()}/>
                     :
-                    <NavLink to='/profile'><UserSvg /></NavLink>
+                    <NavLink exact activeClassName='active-nav' className='logoSvg' to='/profile'><UserSvg /></NavLink>
                 }
         </div>
         
