@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
 import { showPop } from '../../redux/user/user.actions';
@@ -24,35 +24,27 @@ const SideNav = ({ loginPopState, toggleLoginPopUp, currentUser }) =>{
                 (loginPopState) ? <LoginPopup/> : null
             }            
             <div className='logo'>
-                <Link to='/'><LogoSvg/></Link>
+                <NavLink to='/'><LogoSvg/></NavLink>
             </div>
             <ul className="side-list">
-                <li className="nav-item nav-item--active">
-                    <Link to="/" className='nav-link'>
+                <li className="nav-item">
+                    <NavLink exact activeClassName='active-link' to="/" className='nav-link'>
                         <HomeSvg className='svg-icon' />
                         <span>Home</span>
-                    </Link>
+                    </NavLink>
                 </li>
 
                 <li className="nav-item">
-                    <Link to="/events" className='nav-link'>
+                    <NavLink activeClassName='active-link'  to="/events" className='nav-link'>
                         <EventSvg className='svg-icon' />
                         <span>Events</span>
-                    </Link>
+                    </NavLink>
                 </li>
-
-                {/* <li className="nav-item">
-                    <Link to="/place" className='nav-link'>
-                        <PlaceSvg className='svg-icon' />
-                        <span>Place</span>
-                    </Link>
-                </li> */}
-
                 <li className="nav-item">
-                    <Link to="/about" className='nav-link'>
+                    <NavLink activeClassName='active-link' to="/about" className='nav-link'>
                         <AboutSvg className='svg-icon' />
                         <span>About</span>
-                    </Link>
+                    </NavLink>
                 </li>
             </ul>            
             
@@ -60,10 +52,10 @@ const SideNav = ({ loginPopState, toggleLoginPopUp, currentUser }) =>{
                 
                 currentUser ? (
                     <div className="user"> 
-                        <Link className='nav-link' to='/profile'>
+                        <NavLink activeClassName='active-link' className='nav-link' to='/profile'>
                             <UserSvg className='svg-icon' />
                             <span> {currentUser.email}</span>
-                        </Link>
+                        </NavLink>
                     </div>
                     ) 
                     : 

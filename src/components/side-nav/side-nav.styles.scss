@@ -43,10 +43,15 @@
         }
 
         &:hover::before,
-        &.nav-item--active::before{
+        &.nav-item--active::before {
             transform: scaleY(1);
             width: 100%;
         }
+    }
+
+    .active-link {
+        color:white;
+        background-color: var(--blue-grey-primary)!important;
     }
 
     .nav-link:link,
@@ -67,10 +72,8 @@
         &:hover{
             color:#60c9f5;
         }
-        
-        
     }
-
+    
     .svg-icon{
         width: 1.2rem;
         height: 2rem;

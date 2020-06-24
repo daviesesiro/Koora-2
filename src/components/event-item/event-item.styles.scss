@@ -37,4 +37,12 @@
             color: white;
         }
     }
+    .event-item-link{
+        position: absolute;
+        z-index: 1000;
+        color: red;
+        right: 1rem;
+        top: .5rem;
+        font-size:1rem;
+    }
 }

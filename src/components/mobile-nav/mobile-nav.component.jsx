@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
 import { showPop } from '../../redux/user/user.actions';
@@ -21,20 +21,20 @@ const MobileNav = ({ toggleLoginPopUp, loginPopState, currentUser }) => (
             (loginPopState) ? <LoginPopup/> : null
         }
         <div className='nav top-nav'>
-            <Link to='/' className='logo'><p>Koora</p></Link>           
+            <NavLink to='/' className='logo'><p>Koora</p></NavLink>           
             <div className='user-pop'>
-                <Link to='/about'><AboutSvg className='svg-icon' /></Link>               
+                <NavLink to='/about'><AboutSvg className='svg-icon' /></NavLink>               
             </div>
         </div>
         <div className='nav bottom-nav'>
-            <Link to='/'><HomeSvg /></Link> 
-            <Link to='/events'><EventSvg /></Link> 
-            <Link to='/place'><PlaceSvg /></Link> 
+            <NavLink to='/'><HomeSvg /></NavLink> 
+            <NavLink to='/events'><EventSvg /></NavLink> 
+            <NavLink to='/place'><PlaceSvg /></NavLink> 
             {                
                 !currentUser ?
                     <UserSvg onClick={() => toggleLoginPopUp()}/>
                     :
-                    <Link to='/profile'><UserSvg /></Link>
+                    <NavLink to='/profile'><UserSvg /></NavLink>
                 }
         </div>
         

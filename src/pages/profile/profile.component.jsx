@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import {selectCurrentUser,selectUserEvents } from '../../redux/user/user.selector';
-import {setUserEvents} from '../../redux/user/user.actions'
+import { setUserEvents } from '../../redux/user/user.actions'
+
+import Spinner from '../../components/spinner/spinner.component';
 import EventItem from '../../components/event-item/event-item.component';
 import Create from '../create';
 import {db, auth} from '../../firebase/firebase.utils';
@@ -12,8 +14,11 @@ import './profile.styles.scss';
 import { Redirect } from 'react-router-dom';
 
 class ProfilePage extends React.Component {
-
+    state = {
+        loading: false
+    }
     componentDidMount() {
+        this.setState({ loading: true });
         const { currentUser, setEvents } = this.props;
         let events = [];
         if(currentUser){
@@ -22,12 +27,13 @@ class ProfilePage extends React.Component {
                 events.push({ id: doc.id, ...doc.data() })
             })
             setEvents(events);
+            this.setState({ loading: false });
         });}
     }
 
     render() {
         const { currentUser, userEvents } = this.props;
-        
+        const { loading } = this.state;
         if (currentUser) {             
         return (            
             <div className="profile-page">
@@ -40,13 +46,18 @@ class ProfilePage extends React.Component {
                         <div onClick={()=>auth.signOut()} className='btn logout' >Logout out</div>
                     </div>
                 </div>
-                <div className='event-items'>
-                    {
-                            userEvents.map(({ id, ...otherProps }) => (
-                            <EventItem key={id} {...otherProps}/>
-                        ))
-                    }
-                </div>
+            
+                {(!loading) ?
+                    <div className='event-items'>
+                        {userEvents.map(({ id, ...otherProps }) => (
+                        <EventItem key={id} {...otherProps} />
+                        ))}
+                    </div>
+                :
+                <Spinner/>
+                }                    
+                    
+                
             </div>
             );
         } else {
