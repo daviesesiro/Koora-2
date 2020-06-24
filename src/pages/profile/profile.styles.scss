@@ -2,29 +2,85 @@
     width:100%;
     height: 100vh;
     overflow-y: scroll;
-    padding: 5rem 0;
+    padding: 3rem 1rem;
     background-color:white;
+    user-select: none;
+    & .top-content{
+        flex-direction: column;
+        line-height: 2rem;
+    }
+    
+    .username{
+        text-transform: uppercase;
+        color: rgb(34, 34, 34);
+        margin-bottom:.5rem 0;
+    }
 
-    .top-content{
-        margin: 2rem auto 4rem auto;
-        width: 80%;
+    .sub-head{
+        font-weight: 300;
+        margin-bottom: 1rem;
     }
-    .add-event-toggle{
-        display: inline-block;
+
+    .btn-container{
+        display: flex;
+        justify-content: flex-start;
+        
+        & div{
+            margin-right: 2rem;
+        }
+    }
+
+    .btn{
+        padding: .31rem;
+        font-size: .8rem;
         cursor: pointer;
-        border-radius: 50%;
-        width: 2rem;
-        font-size: 1.2rem;
-        text-align: center;
-        padding: .06rem .4rem;
-        border: 1px solid black;
+        color: white;
+        font-weight: 700;
+        border-radius: 9px;
+        width: fit-content;
+        box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.562);
+        user-select: none;
+        transition: .1s ;
+        &:hover{
+            box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.712);
+            transform: translateY(-1px);
+
+        } &:active{
+            box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.349);
+            transform: translateY(2px);
+        }
     }
+
+    .logout{
+        background-color: #2BACE2;
+
+        &:hover{
+            background-color: darken($color: #2bace2, $amount: 5);
+        }
+
+        &:active{
+            background-color: darken($color: #2bace2, $amount: 10);
+        }
+    }
+
+    .add-event{
+        background-color: #283593;
+
+        &:hover{
+            background-color: darken($color: #283593, $amount: 5);
+        }
+
+        &:active{
+            background-color: darken($color: #283593, $amount: 10);
+        }
+    }
+
     .event-items{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-auto-rows: minmax(20rem, auto);
-        max-width: 90%;
-        margin: 0 auto;
+        max-width: 100%;
+        margin: 3rem auto 5rem ;
         gap: 2rem;
 
         @media screen and (max-width: 1000px){
@@ -33,11 +89,11 @@
         }
         @media screen and (max-width: 700px){
             grid-template-columns: repeat(1, 1fr);
-            max-width: 70%;
+            max-width: 90%;
         }
         @media screen and (max-width: 500px){
             grid-template-columns: repeat(1, 1fr);
-            max-width: 90%;
+            max-width: 100%;
         }
     }
 }

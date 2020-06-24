@@ -21,16 +21,20 @@ class NomineesPage extends React.Component {
     unsubscribe = null;
 
     handleVote = (id) => {
-        this.setState({ isEnabled: true });
+        this.setState({ isDisabled: true });
         const { currentUser, match, toggleLoginPop } = this.props;
-        if (!currentUser) return toggleLoginPop();
+        if (!currentUser) {
+            toggleLoginPop();
+            this.setState({ isDisabled: false });
+            return;
+        }
         Axios.post('https://us-central1-koora-e1eb5.cloudfunctions.net/voteNominee', {
             userId: currentUser.userId,
             nomineeId: id,
             positionId: match.params.positionId
         }).then((res) => {
             console.log(res);
-            this.setState({ isEnabled: false });
+            this.setState({ isDisabled: false });
             toast.info(res.data.message, {
                 position: toast.POSITION.TOP_CENTER                
             });
@@ -60,7 +64,7 @@ class NomineesPage extends React.Component {
 
     render() {
         const { history, Nominees } = this.props;
-        const { isEnabled, loading } = this.state;
+        const { isDisabled, loading } = this.state;
 
         if (loading) return <Spinner />
         return(
@@ -73,7 +77,7 @@ class NomineesPage extends React.Component {
                     <div className='nominee-items'>
                     {
                         Nominees.map((nominee) => (
-                            <NomineeItem isEnabled={isEnabled} handleVote={this.handleVote} key={nominee.id} nominee={nominee}/>
+                            <NomineeItem isEnabled={isDisabled} handleVote={this.handleVote} key={nominee.id} nominee={nominee}/>
                         ))
                     }
                 </div>

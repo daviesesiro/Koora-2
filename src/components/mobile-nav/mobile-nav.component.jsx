@@ -23,8 +23,7 @@ const MobileNav = ({ toggleLoginPopUp, loginPopState, currentUser }) => (
         <div className='nav top-nav'>
             <Link to='/' className='logo'><p>Koora</p></Link>           
             <div className='user-pop'>
-                <AboutSvg className='svg-icon' />          
-                
+                <Link to='/about'><AboutSvg className='svg-icon' /></Link>               
             </div>
         </div>
         <div className='nav bottom-nav'>

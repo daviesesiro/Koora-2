@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import {selectCurrentUser,selectUserEvents } from '../../redux/user/user.selector';
 import {setUserEvents} from '../../redux/user/user.actions'
 import EventItem from '../../components/event-item/event-item.component';
+import Create from '../create';
 import {db, auth} from '../../firebase/firebase.utils';
 
 import './profile.styles.scss';
@@ -30,13 +31,14 @@ class ProfilePage extends React.Component {
         if (currentUser) {             
         return (            
             <div className="profile-page">
+                <Create/>
                 <div className='top-content'>
-                    <h1>{currentUser.email}</h1>
-                    <h3>These are your event s</h3>
-                    <div className='add-event-toggle'>
-                        +
+                    <h1 className='username'>{currentUser.email}</h1>
+                    <h3 className='sub-head'>These are your events</h3>
+                    <div className='btn-container'>
+                        <div className='btn add-event'>Create new</div>
+                        <div onClick={()=>auth.signOut()} className='btn logout' >Logout out</div>
                     </div>
-                    <div onClick={()=>auth.signOut()} >Logout out</div>
                 </div>
                 <div className='event-items'>
                     {

@@ -41,12 +41,12 @@ const SideNav = ({ loginPopState, toggleLoginPopUp, currentUser }) =>{
                     </Link>
                 </li>
 
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <Link to="/place" className='nav-link'>
                         <PlaceSvg className='svg-icon' />
                         <span>Place</span>
                     </Link>
-                </li>
+                </li> */}
 
                 <li className="nav-item">
                     <Link to="/about" className='nav-link'>

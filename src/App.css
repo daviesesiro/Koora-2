@@ -1,7 +1,7 @@
 .app{
   position: unset;
   margin: 0rem auto;
-  background: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
+  background: white;
   /* overflow-y: scroll; */
 }
 
