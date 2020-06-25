@@ -14,14 +14,14 @@ import './nominee.styles.scss';
 
 class NomineesPage extends React.Component {
     state = {
-        loading: true,
-        isDisabled: false
+        loading: true
     }
 
     unsubscribe = null;
 
-    handleVote = (id) => {
-        this.setState({ isDisabled: true });
+    handleVote = (id, e) => {
+        e.persist();
+        e.target.disabled = true;
         const { currentUser, match, toggleLoginPop } = this.props;
         if (!currentUser) {
             toggleLoginPop();
@@ -34,7 +34,7 @@ class NomineesPage extends React.Component {
             positionId: match.params.positionId
         }).then((res) => {
             console.log(res);
-            this.setState({ isDisabled: false });
+            e.target.disabled = false;
             toast.info(res.data.message, {
                 position: toast.POSITION.TOP_CENTER                
             });
@@ -48,10 +48,15 @@ class NomineesPage extends React.Component {
         this.setState({ loading: true });        
         const {match, setNominees} = this.props;
         
-        this.unsubscribe = db.collection('nominees').where('positionId', "==", `${match.params.positionId}`).onSnapshot(snapshot => {  
-            setNominees(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-            this.setState({ loading: false });
+        this.unsubscribe = db.collection('nominees')
+            .where('positionId', "==", `${match.params.positionId}`).onSnapshot(snapshot => {  
+                setNominees(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                this.setState({ loading: false });
         });
+    }
+
+    handleBack = () => {
+        
     }
 
     componentDidMount() {
@@ -71,7 +76,7 @@ class NomineesPage extends React.Component {
             <div className='nominee-page'>
                 <ToastContainer autoClose={2000} />
                 <div className='top-content'>
-                    <NavBack className='nav-back' onClick={()=> history.goBack()}/>
+                    <NavBack className='nav-back' onClick={()=> history.push(`/events/${Nominees[0].eventId}`)}/>
                     <h1 className='position-title'>Nominees</h1>
                 </div>
                     <div className='nominee-items'>

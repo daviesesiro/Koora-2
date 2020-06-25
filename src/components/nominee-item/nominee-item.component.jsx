@@ -10,7 +10,7 @@ const NomineeItem = ({ nominee: { votes, name, id, }, handleVote, isEnabled}) =>
             <span className='nominee-votes'>{votes}</span>
             <div className='card-bottom'>
                 <div className='nominee-name'>{name}</div>
-                <button disabled={isEnabled} onClick={()=>handleVote(id)}>Vote</button>
+                <button onClick={(e)=>handleVote(id,e)}>Vote</button>
             </div>
         </div>
     );

@@ -37,7 +37,7 @@ class PositionsPage extends React.Component{
         return (
             <div className='position-page'>
                 <div className='top-content'>
-                    <NavBack className='nav-back' onClick={()=> history.goBack()}/>
+                    <NavBack className='nav-back' onClick={()=> history.push('/events')}/>
                     <h1 className='position-event-name'>Positions</h1>
                 </div>
 

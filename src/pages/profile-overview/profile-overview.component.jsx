@@ -11,7 +11,6 @@ import Create from '../create';
 import {db, auth} from '../../firebase/firebase.utils';
 
 import './profile-overview.styles.scss';
-import { Redirect } from 'react-router-dom';
 
 class ProfileOverview extends React.Component {
     state = {
@@ -24,13 +23,14 @@ class ProfileOverview extends React.Component {
         
         let events = [];
         if(currentUser){
-        db.collection('events').where('userId', "==", `${currentUser.userId}`).orderBy('start_at', 'desc' ).get().then((snapshot) => {
-            snapshot.docs.forEach((doc) => {
-                events.push({ id: doc.id, ...doc.data() })
-            })
-            setEvents(events);
-            this.setState({ loading: false });            
-        });}
+            db.collection('events').where('userId', "==", `${currentUser.userId}`).orderBy('start_at', 'desc' ).get().then((snapshot) => {
+                snapshot.docs.forEach((doc) => {
+                    events.push({ id: doc.id, ...doc.data() })
+                })
+                setEvents(events);
+                this.setState({ loading: false });            
+            });
+        }
     }
 
     render() {
@@ -60,8 +60,7 @@ class ProfileOverview extends React.Component {
                     :
                     <Spinner/>
                     }
-                </div>
-                    
+                </div>                    
                 
             </div>
             );

@@ -25,12 +25,16 @@ class App extends React.Component{
   componentDidMount() {
     const { setUser } = this.props;
 
-    auth.onAuthStateChanged(user => {      
+    this.unsubscribe = auth.onAuthStateChanged(user => {      
       const newUser = user ? { email: user.email, userId: user.uid } : null;
       console.log(newUser);
       setUser(newUser);
       this.setState({loading: false})
     });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
   }
   render() {
     if(this.state.loading) return <Spinner/>

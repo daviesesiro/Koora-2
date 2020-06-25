@@ -28,13 +28,13 @@ const MobileNav = ({ toggleLoginPopUp, loginPopState, currentUser }) => (
         </div>
         <div className='nav bottom-nav'>
             <NavLink exact activeClassName='active-nav' className='logoSvg' to='/'><HomeSvg /></NavLink> 
-            <NavLink exact activeClassName='active-nav' className='logoSvg' to='/events'><EventSvg /></NavLink> 
+            <NavLink activeClassName='active-nav' className='logoSvg' to='/events'><EventSvg /></NavLink> 
             <NavLink exact activeClassName='active-nav' className='logoSvg' to='/place'><PlaceSvg /></NavLink> 
             {                
                 !currentUser ?
-                    <UserSvg activeClassName='active-nav' className='logoSvg' onClick={() => toggleLoginPopUp()}/>
+                    <UserSvg className='logoSvg' onClick={() => toggleLoginPopUp()}/>
                     :
-                    <NavLink exact activeClassName='active-nav' className='logoSvg' to='/profile'><UserSvg /></NavLink>
+                    <NavLink activeClassName='active-nav' className='logoSvg' to='/profile'><UserSvg /></NavLink>
                 }
         </div>
         

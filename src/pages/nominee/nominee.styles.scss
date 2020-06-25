@@ -5,10 +5,11 @@
     position: relative;
     padding-top: 1rem;
     @media screen and (max-width:800px){
-        padding: 3rem 0 5rem 0;
+        padding: 4rem 0 5rem 0;
     }
     .nav-back{
         position: absolute;
+        z-index: 12;
         width: 3rem;
         left: 1rem;
         fill: #2bace2;
@@ -44,7 +45,7 @@
         }
         @media screen and (max-width:600px){
             grid-template-columns: repeat(1, 1fr);
-            gap:8rem 0;
+            gap:3.5rem 0;
         }
     }
 }
