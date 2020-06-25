@@ -41,12 +41,11 @@
         }
 
         &:hover{
-            background-color: var(--blue-grey-primary);
+            background-color: #263238;
         }
     }
     .active-nav{
-        background-color: var(--blue-grey-primary);
-        
+        background-color: #263238 !important;        
         animation-fill-mode: both;
         svg{
             fill: rgb(109, 136, 194);

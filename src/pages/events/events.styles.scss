@@ -20,28 +20,25 @@
     @media screen and (max-width:600px){
         margin:4rem 0 10rem ;
     }
-
-
 }
 
 .top-content{
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    // display: flex;
 }
 
 .refresh-svg{
     width: 3rem;
-    margin-right: 5rem;
+    // margin-right: auto;
+
 }
 .search{
-    margin-bottom:2rem;
-    width: 20rem;
+    // margin: 0 auto 2rem;
     
     input,
     input:focus,
     input:active{
-        min-width: 20rem;
+        min-width: 10rem;
+        max-width: 20rem;
         font-size: 1.3rem;
         border: none;
         border-bottom: 2px solid #2bace2;
