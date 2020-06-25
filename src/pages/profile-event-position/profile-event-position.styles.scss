@@ -1,0 +1,36 @@
+.profile-event-page{    
+    background-color: rgb(22, 25, 36);;
+    height: 100vh;
+    overflow-y: scroll;
+    width: 100%;
+    padding-top: 1rem;
+    position: relative;
+    @media screen and (max-width:800px){
+        padding: 3rem 0 5rem 0;
+    }
+    .position-event-name{
+        color: #768a92;
+        font-size: 1.4rem;
+        margin: 0 auto;    
+        cursor: pointer;
+
+        &:hover{
+            text-decoration: double underline;
+        }
+    }
+
+    .nav-back{
+        position: absolute;
+        width: 3rem;
+        left: 1rem;
+        fill: #2bace2;
+        flex: 1 1;
+        cursor: pointer;    
+        transition: .2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+        &:hover{
+            transform: scale(1.2) translateX(-5px);
+            fill: darken($color: #2bace2, $amount: 10);
+
+        }    
+    }
+}
