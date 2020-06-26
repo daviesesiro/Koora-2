@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { db } from '../../firebase/firebase.utils';
 import { setEvents } from '../../redux/event/event.actions';
+import { selectEvents } from '../../redux/event/event.selector';
 
 import { ReactComponent as RefreshSvg } from '../../svgicon/refresh.svg';
 import Spinner from '../../components/spinner/spinner.component';
@@ -75,8 +77,8 @@ class EventsPage extends React.Component{
     }
 }
 
-const mapStateToProps = (state) => ({
-    pageEvents: state.event.events
+const mapStateToProps = createStructuredSelector({
+    pageEvents: selectEvents
 });
 
 const mapDispatchToProps = dispatch => ({

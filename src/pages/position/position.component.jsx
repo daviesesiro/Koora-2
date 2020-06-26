@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { db } from '../../firebase/firebase.utils';
+import { setPositions } from '../../redux/event/event.actions';
+import { selectPositions } from '../../redux/event/event.selector';
 
 import { ReactComponent as NavBack } from '../../svgicon/back.svg';
 import Spinner from '../../components/spinner/spinner.component';
@@ -52,12 +55,12 @@ class PositionsPage extends React.Component{
         );        
     }
 }
-const mapStateToProps = (state) => ({
-    positions: state.event.positions
+const mapStateToProps = createStructuredSelector({
+    positions: selectPositions
 });
 
 const mapDispatchToProps = dispatch => ({
-    setPosition: (positions) => dispatch({type:"SET_POSITION", payload:positions}) 
+    setPosition: (positions) => dispatch(setPositions(positions)) 
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PositionsPage);

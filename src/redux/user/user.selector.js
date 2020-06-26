@@ -12,6 +12,11 @@ export const selectUserEvents = createSelector(
     user => user ? user.events : []
 );
 
+export const selectUserPositions = createSelector(
+    [selectUser],
+    user => user ? user.positions : []
+);
+
 export const selectPop = createSelector(
     [selectUser],
     user => user.showPop

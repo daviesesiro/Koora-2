@@ -7,17 +7,32 @@
     position: relative;
 
     @media screen and (max-width:800px){
-        padding: 3rem 0 5rem 0;
+        padding: 4rem 0 5rem 0;
     }
 
     .p-position-event-name{
         color: #768a92;
         font-size: 1.4rem;
         margin: 0 auto;    
-        cursor: pointer;
         user-select: none;
+        text-align: center;
         &:hover{
             text-decoration: double underline;
+        }
+    }
+
+    .sucker-msg{
+        position: absolute;
+        top:0;
+        text-align: center;
+        font-size: 2rem;
+        color: white;
+        width: 100%;
+        height: 100vh;
+        background-color: red;
+
+        & p{
+            margin-top: 18rem;
         }
     }
 

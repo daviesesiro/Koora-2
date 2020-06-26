@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
 import { db } from '../../firebase/firebase.utils';
+import { setNominees } from '../../redux/event/event.actions';
+import { selectCurrentUser } from '../../redux/user/user.selector';
+import { selectNominees } from '../../redux/event/event.selector';
 
 import { ReactComponent as NavBack } from '../../svgicon/back.svg';
 import NomineeItem from '../../components/nominee-item/nominee-item.component';
@@ -46,11 +51,11 @@ class NomineesPage extends React.Component {
     }
     getData() {
         this.setState({ loading: true });        
-        const {match, setNominees} = this.props;
+        const {match, setNominee} = this.props;
         
         this.unsubscribe = db.collection('nominees')
             .where('positionId', "==", `${match.params.positionId}`).onSnapshot(snapshot => {  
-                setNominees(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+                setNominee(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
                 this.setState({ loading: false });
         });
     }
@@ -92,13 +97,13 @@ class NomineesPage extends React.Component {
 
 }
 
-const mapStateToProps = (state) => ({
-    Nominees: state.event.nominees,
-    currentUser: state.user.currentUser
+const mapStateToProps = createStructuredSelector({
+    Nominees: selectNominees,
+    currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({
-    setNominees: nominees => dispatch({ type: 'SET_NOMINEES', payload: nominees }),
+    setNominee: nominees => dispatch(setNominees(nominees)),
     toggleLoginPop: () => dispatch(showPop())
 });
 

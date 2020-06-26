@@ -1,0 +1,25 @@
+.modal-overlay{
+    position: fixed;
+    top:0;
+    left:0;
+    background-color: rgba(0,0,0,.5);
+    width:100vw;
+    height: 100vh;
+    z-index: 12;
+    
+    .close-svg{
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        width: 1rem;
+    }
+    .modal-content{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        height: 70%;
+        background-color: white;
+    }
+}

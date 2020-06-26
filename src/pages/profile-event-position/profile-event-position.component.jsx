@@ -4,9 +4,12 @@ import { createStructuredSelector } from 'reselect';
 
 import { db } from '../../firebase/firebase.utils';
 
-import {selectCurrentUser } from '../../redux/user/user.selector';
+import {selectCurrentUser, selectUserPositions } from '../../redux/user/user.selector';
+import {setUserPositions } from '../../redux/user/user.actions';
+import {showModal } from '../../redux/event/event.actions';
 
 import { ReactComponent as NavBack } from '../../svgicon/back.svg';
+import Modal from '../../components/modal/modal.component';
 import PositionItem from '../../components/position-item/position-item.component';
 import Spinner from '../../components/spinner/spinner.component';
 
@@ -15,45 +18,51 @@ import './profile-event-position.styles.scss';
 class ProfileEventPositionPage extends React.Component{
     state = {
         loading: true,
-        positions: null
+        createdBy: ''
     }
 
     componentDidMount() {
         this.setState({ loading: true });
-        const { match, currentUser } = this.props;
+        const { match, currentUser, setPositions } = this.props;
         db.collection('positions').where('eventId', '==', `${match.params.eventId}`)
-            // .where('userId', '==', `${currentUser.userId}`)
+            .where('userId', '==', `${currentUser.userId}`)
             .get().then(snapshot => {
-                this.setState({ positions: snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) });
-                console.log(this.state.positions);
+                setPositions( snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) );
                 this.setState({ loading: false });
         });
+        db.collection('events').doc(`${match.params.eventId}`)
+            .get().then(snapshot => {
+                this.setState({createdBy:snapshot.data().userId})
+        })
     }
     render() {
-        const { history, match, currentUser } = this.props;
-        const { positions } = this.state;
+        const { history, match, currentUser, positions } = this.props;
+        const {createdBy } = this.state;
         if (this.state.loading) return <Spinner />
         
         return (
             <div className='profile-event-page'>
+                <Modal>
+
+                </Modal>
                 <div className='top-content'>
                     <NavBack className='nav-back'
                         onClick={() => history.push(`/profile`)} />
                     <h1 className='p-position-event-name'>Positions</h1>
                 </div>
-                {this.state.positions.some(pos => pos.userId === currentUser.userId) ?
+                {createdBy === currentUser.userId ?
                     <div className='btn-container'>
                         <div className='btn add'>Add Position</div>
-                        <div className='btn delete'>Toggle delete</div>
+                        <div className='btn delete'>Toggle Delete</div>
                     </div>
-                    :null
+                    : <div className='sucker-msg'><p>You are not supposed to be here sucker!!!</p></div>
                 }
                 <div className='p-position-items'>
-                {
+                    {
                     positions.map(({id, ...otherProps}) =>(
                         <PositionItem handleClick={()=>history.push(`${match.url}/${id}`)} key={id} {...otherProps} />
                     ))
-                }
+                    }                    
                 </div>
             </div>
         )
@@ -61,7 +70,13 @@ class ProfileEventPositionPage extends React.Component{
 }
 
 const mapStateToProps = createStructuredSelector({
-    currentUser: selectCurrentUser
+    currentUser: selectCurrentUser,
+    positions:selectUserPositions
 });
 
-export default connect(mapStateToProps)(ProfileEventPositionPage);
+const mapDispatchToProps = dispatch => ({
+    setPositions: positions => dispatch(setUserPositions(positions)),
+    showModal: () => dispatch(showModal())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileEventPositionPage);
