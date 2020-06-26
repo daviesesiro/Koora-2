@@ -14,6 +14,7 @@ import PositionItem from '../../components/position-item/position-item.component
 import Spinner from '../../components/spinner/spinner.component';
 
 import './profile-event-position.styles.scss';
+import { selectModal } from '../../redux/event/event.selector';
 
 class ProfileEventPositionPage extends React.Component{
     state = {
@@ -28,23 +29,22 @@ class ProfileEventPositionPage extends React.Component{
             .where('userId', '==', `${currentUser.userId}`)
             .get().then(snapshot => {
                 setPositions( snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) );
-                this.setState({ loading: false });
+                
         });
         db.collection('events').doc(`${match.params.eventId}`)
             .get().then(snapshot => {
-                this.setState({createdBy:snapshot.data().userId})
+                this.setState({ createdBy: snapshot.data().userId });
+                this.setState({ loading: false });
         })
     }
     render() {
-        const { history, match, currentUser, positions } = this.props;
+        const { history, match, currentUser, positions, toggleModal } = this.props;
         const {createdBy } = this.state;
         if (this.state.loading) return <Spinner />
         
         return (
             <div className='profile-event-page'>
-                <Modal>
-
-                </Modal>
+                <Modal children={<h1>Hello</h1>} />
                 <div className='top-content'>
                     <NavBack className='nav-back'
                         onClick={() => history.push(`/profile`)} />
@@ -52,7 +52,7 @@ class ProfileEventPositionPage extends React.Component{
                 </div>
                 {createdBy === currentUser.userId ?
                     <div className='btn-container'>
-                        <div className='btn add'>Add Position</div>
+                        <div onClick={()=>toggleModal()} className='btn add'>Add Position</div>
                         <div className='btn delete'>Toggle Delete</div>
                     </div>
                     : <div className='sucker-msg'><p>You are not supposed to be here sucker!!!</p></div>
@@ -71,12 +71,12 @@ class ProfileEventPositionPage extends React.Component{
 
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
-    positions:selectUserPositions
+    positions: selectUserPositions
 });
 
 const mapDispatchToProps = dispatch => ({
     setPositions: positions => dispatch(setUserPositions(positions)),
-    showModal: () => dispatch(showModal())
+    toggleModal: () => dispatch(showModal())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileEventPositionPage);
