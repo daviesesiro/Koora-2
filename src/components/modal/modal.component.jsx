@@ -11,23 +11,19 @@ import './modal.styles.scss';
 export const Modal = ({ modalState, toggleModal, children }) => {
 
     const overlayClick = (e) => {
-        if(e.target.className === 'modal-overlay'){
+        if(e.target.className === 'show modal-overlay' || e.target.className === 'disappear modal-overlay'){
             toggleModal();            
         }
     }
-
-    if (modalState) {
-        return (
-            <div onClick={(e)=>overlayClick(e)} className='modal-overlay'>
-                <div className='modal-content'>
-                    <CloseSvg onClick={()=>toggleModal()} className='close-svg'/>
-                    {children}
-                </div>
+    
+    return (
+        <div onClick={(e)=>overlayClick(e)} className={`${modalState? 'show': 'disappear'} modal-overlay`}>
+            <div className={`${modalState?'show':'disappear'} modal-content`}>
+                <CloseSvg onClick={()=>toggleModal()} className='close-svg'/>
+                {children}
             </div>
-        )        
-    } else {
-        return null
-    }
+        </div>
+    )        
 }
 
 const mapStateToProps = createStructuredSelector({

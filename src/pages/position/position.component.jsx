@@ -19,12 +19,8 @@ class PositionsPage extends React.Component{
     getData = () => {
         this.setState({loading:true});
         const { match, setPosition } = this.props;
-        const positions = [];
-        db.collection('positions').where('eventId', '==', `${match.params.eventId}`).get().then((snapShot) => {
-            snapShot.docs.forEach(position => {
-                positions.push({id: position.id, ...position.data() })
-            });            
-            setPosition(positions);
+        db.collection('positions').where('eventId', '==', `${match.params.eventId}`).get().then((snapShot) => {          
+            setPosition(snapShot.docs.map(doc=>({id: doc.id,...doc.data() })));
             this.setState({loading:false});
         });
     }
@@ -46,7 +42,7 @@ class PositionsPage extends React.Component{
 
                 <div className='position-items'>
                     {
-                        positions.map(({id, ...otherProps}) =>(
+                        positions && positions.map(({id, ...otherProps}) =>(
                             <PositionItem handleClick={()=>history.push(`${match.url}/${id}`)} key={id} {...otherProps} />
                         ))
                     }

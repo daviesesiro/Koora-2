@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { auth} from './firebase/firebase.utils';
 import { showPop, setCurrentUser } from './redux/user/user.actions';
 
+import LocationFade from './components/location-fade/location-fade.component';
 import SideNav from './components/side-nav/side-nav.component';
 import MobileNav from './components/mobile-nav/mobile-nav.component';
 import AboutPage from './pages/about/about.component';
@@ -45,12 +46,14 @@ class App extends React.Component{
           <CreatePop/>
           <SideNav />
           <MobileNav />
-          <Switch>
-            <Route exact path='/' component={HomePage}/>
-            <Route exact path='/about' component={AboutPage}/>
-            <Route path='/events' component={EventPage}/>
-            <Route path='/profile' component={ProfilePage}/>
-          </Switch>
+          <LocationFade className='ff'>
+            <Switch>
+              <Route exact path='/' component={HomePage}/>
+              <Route exact path='/about' component={AboutPage}/>
+              <Route path='/events' component={EventPage}/>
+              <Route path='/profile' component={ProfilePage}/>
+              </Switch>
+          </LocationFade>
         </div>
       </div>
     );
