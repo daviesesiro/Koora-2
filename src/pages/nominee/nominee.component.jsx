@@ -25,6 +25,7 @@ class NomineesPage extends React.Component {
     unsubscribe = null;
 
     handleVote = (id, e) => {
+        e.persist();
         const { currentUser, match, toggleSignSignOut } = this.props;
         if (!currentUser) {
             toggleSignSignOut();

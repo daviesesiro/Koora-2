@@ -17,6 +17,9 @@
         animation-name: pulsate;
         animation-duration: 1s;
         animation-iteration-count: infinite;
+        @media (max-width: 500px) {
+            animation: unset;
+        }
     }
 
     &:focus{
