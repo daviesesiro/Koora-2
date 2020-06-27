@@ -15,6 +15,6 @@ export const setNominees = (nominees) => ({
     payload: nominees
 });
 
-export const showModal = () => ({
+export const toggleModal = () => ({
     type: eventActionTypes.SHOW_MODAL
 });

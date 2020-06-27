@@ -12,7 +12,7 @@ import NomineeItem from '../../components/nominee-item/nominee-item.component';
 import { toast,ToastContainer } from 'react-toastify';
 import Spinner from '../../components/spinner/spinner.component';
 import Axios from 'axios';
-import { showPop } from '../../redux/user/user.actions';
+import {showSignSignOut } from '../../redux/user/user.actions';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './nominee.styles.scss';
@@ -25,14 +25,13 @@ class NomineesPage extends React.Component {
     unsubscribe = null;
 
     handleVote = (id, e) => {
-        e.persist();
-        e.target.disabled = true;
-        const { currentUser, match, toggleLoginPop } = this.props;
+        const { currentUser, match, toggleSignSignOut } = this.props;
         if (!currentUser) {
-            toggleLoginPop();
+            toggleSignSignOut();
             this.setState({ isDisabled: false });
-            return;
+            return ;
         }
+        e.target.disabled = true;
         Axios.post('https://us-central1-koora-e1eb5.cloudfunctions.net/voteNominee', {
             userId: currentUser.userId,
             nomineeId: id,
@@ -46,7 +45,7 @@ class NomineesPage extends React.Component {
             
         }).catch((error) => {
             console.log(error)
-        })       
+        })      
     
     }
     getData() {
@@ -104,7 +103,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
     setNominee: nominees => dispatch(setNominees(nominees)),
-    toggleLoginPop: () => dispatch(showPop())
+    toggleSignSignOut: () => dispatch(showSignSignOut())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NomineesPage);

@@ -4,8 +4,9 @@ const INITIAL_STATE = {
     currentUser: {},
     events: null,
     positions: null,
-    nominee : null,
-    showPop: false
+    nominee: null,
+    showSignInSignOut: false,
+    isOnLoginForm: true
 }
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -14,24 +15,29 @@ export const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state, 
                 currentUser: action.payload,
-                showPop: false
+                showSignInSignOut: false
             };
         case userActionTypes.SET_USER_EVENTS:
             return {
                 ...state, 
                 events: action.payload,
-                showPop: false
+                showSignInSignOut: false
             };
         case userActionTypes.SET_USER_POSITIONS:
             return {
                 ...state, 
                 positions: action.payload,
-                showPop: false
+                showSignInSignOut: false
             };
-        case userActionTypes.POP_SHOW:
+        case userActionTypes.FORM_SWITCH:
             return {
                 ...state, 
-                showPop: !state.showPop 
+                isOnLoginForm: !state.isOnLoginForm
+            };
+        case userActionTypes.SHOW_SIGNIN_SIGNOUT:
+            return {
+                ...state, 
+                showSignInSignOut: !state.showSignInSignOut
             };
         default:
             return state;

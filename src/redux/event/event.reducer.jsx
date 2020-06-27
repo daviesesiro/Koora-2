@@ -2,7 +2,7 @@ import eventActionTypes from './event.types';
 
 const INITIAL_STATE = {
     events: null,
-    positions: null,
+    positions: [],
     nominees: null,
     showModal: false
 };
@@ -14,7 +14,7 @@ export const eventReducer = (state = INITIAL_STATE, action)=>{
                 ...state,
                 events: action.payload
             };        
-        case eventActionTypes.SET_POSITION:
+        case eventActionTypes.SET_POSITIONS:
             return {
                 ...state,
                 positions: action.payload

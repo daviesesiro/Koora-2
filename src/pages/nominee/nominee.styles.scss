@@ -9,7 +9,6 @@
     }
     .nav-back{
         position: absolute;
-        z-index: 12;
         width: 3rem;
         left: 1rem;
         fill: #2bace2;
@@ -27,7 +26,7 @@
         font-size: 1.4rem;
         margin: 0 auto;    
         cursor: pointer;
-        display: inline-block;
+        text-align: center;
         &:hover{
             text-decoration: double underline;
         };

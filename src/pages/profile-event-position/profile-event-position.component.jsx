@@ -6,15 +6,15 @@ import { db } from '../../firebase/firebase.utils';
 
 import {selectCurrentUser, selectUserPositions } from '../../redux/user/user.selector';
 import {setUserPositions } from '../../redux/user/user.actions';
-import {showModal } from '../../redux/event/event.actions';
+import {toggleModal } from '../../redux/event/event.actions';
 
 import { ReactComponent as NavBack } from '../../svgicon/back.svg';
 import Modal from '../../components/modal/modal.component';
 import PositionItem from '../../components/position-item/position-item.component';
+import EventForm from '../../components/event-form/event-form.component';
 import Spinner from '../../components/spinner/spinner.component';
 
 import './profile-event-position.styles.scss';
-import { selectModal } from '../../redux/event/event.selector';
 
 class ProfileEventPositionPage extends React.Component{
     state = {
@@ -44,7 +44,9 @@ class ProfileEventPositionPage extends React.Component{
         
         return (
             <div className='profile-event-page'>
-                <Modal children={<h1>Hello</h1>} />
+                <Modal>
+                    {/* <EventForm/> */}
+                </Modal>
                 <div className='top-content'>
                     <NavBack className='nav-back'
                         onClick={() => history.push(`/profile`)} />
@@ -76,7 +78,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
     setPositions: positions => dispatch(setUserPositions(positions)),
-    toggleModal: () => dispatch(showModal())
+    toggleModal: () => dispatch(toggleModal())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileEventPositionPage);

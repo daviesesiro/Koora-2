@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import {db, auth} from '../../firebase/firebase.utils';
 
 import {selectCurrentUser,selectUserEvents } from '../../redux/user/user.selector';
 import { setUserEvents } from '../../redux/user/user.actions'
-import { showModal } from '../../redux/event/event.actions';
+import { toggleModal } from '../../redux/event/event.actions';
 
+import Button2 from '../../components/button/button2.component';
+import EventForm from '../../components/event-form/event-form.component';
 import Spinner from '../../components/spinner/spinner.component';
 import EventItem from '../../components/event-item/event-item.component';
 import Modal from '../../components/modal/modal.component';
-import {db, auth} from '../../firebase/firebase.utils';
 
 import './profile-overview.styles.scss';
 
@@ -17,6 +19,7 @@ class ProfileOverview extends React.Component {
     state = {
         loading: false
     }
+
     componentDidMount() {
         const { currentUser, setEvents } = this.props;
         document.title = `Koora | ${currentUser.email}`;
@@ -40,13 +43,29 @@ class ProfileOverview extends React.Component {
         const { loading } = this.state;         
         return (            
             <div className="profile-page">
-                <Modal children={<h1>Hello</h1>} />
+                <Modal title='Create Event'>
+                    <EventForm/>
+                </Modal>
+                
                 <div className='top-content'>
                     <h1 className='username'>{currentUser.email}</h1>
                     
                     <div className='btn-container'>
-                        <div onClick={()=>toggleModal()} className='btn add-event'>Create new</div>
-                        <div onClick={()=>auth.signOut()} className='btn logout' >Logout out</div>
+                        <Button2
+                            type='button'
+                            color='blue'
+                            handleClick={toggleModal}
+                            className='btn add-event'
+                        >
+                            Add Event
+                        </Button2>
+                        <Button2
+                            color='red'
+                            handleClick={() => auth.signOut()}
+                            className='btn logout' 
+                        >
+                            Logout
+                        </Button2>
                     </div>
                     <hr/>
                     <hr/>
@@ -75,7 +94,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
     setEvents: (events) => dispatch(setUserEvents(events)),
-    toggleModal: () => dispatch(showModal())
+    toggleModal: () => dispatch(toggleModal())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileOverview);

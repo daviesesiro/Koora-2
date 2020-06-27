@@ -17,13 +17,14 @@
 }
 .bottom-nav{
     bottom: 0;
+    border-bottom: 1px solid #01050d;
     justify-content: space-around;
     flex:1;
     svg{
         fill: rgb(65, 106, 153);
     }
 
-    .logoSvg:link,.logoSvg:active,.logo:focus, .logo::after{ 
+    .logoSvg:link,.logo:focus, .logo::after{ 
         cursor: none; 
         display: flex;
         justify-content: center;
@@ -76,6 +77,7 @@
     color: rgb(58, 113, 175);   
     font-family: 'Anton', sans-serif;
     letter-spacing: .8rem;
+    border-top: 1px solid #01050d;
 }
 
 .user-pop{

@@ -3,26 +3,28 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
-import { showPop } from '../../redux/user/user.actions';
-import { selectPop, selectCurrentUser } from '../../redux/user/user.selector';
+import {selectCurrentUser } from '../../redux/user/user.selector';
+import { toggleModal } from '../../redux/event/event.actions';
+import { selectModal } from '../../redux/event/event.selector';
 
-import LoginPopup from '../login-popup/login-popup.component';
+import { Modal } from '../modal/modal.component';
+import SignInSignUp from '../SignIn-SignUp/SignIn-SignUp.component';
 import { ReactComponent as HomeSvg } from '../../svgicon/home.svg';
 import { ReactComponent as EventSvg } from '../../svgicon/server.svg';
-import { ReactComponent as PlaceSvg } from '../../svgicon/map.svg';
 import { ReactComponent as AboutSvg } from '../../svgicon/info.svg';
 import { ReactComponent as UserSvg } from '../../svgicon/user.svg';
 import { ReactComponent as LogoSvg } from '../../svgicon/KooraLogoWeb.svg';
 import './side-nav.styles.scss';
+import { showSignSignOut } from '../../redux/user/user.actions';
 
 
-const SideNav = ({ loginPopState, toggleLoginPopUp, currentUser }) =>{
+const SideNav = ({ modalState, toggleSignInSignOutState, currentUser }) =>{
     
     return (
         <nav className='side-nav'>
-            {
-                (loginPopState) ? <LoginPopup/> : null
-            }            
+            <Modal modalState={modalState} toggleModal={toggleSignInSignOutState}>
+                <SignInSignUp />  
+            </Modal>
             <div className='logo'>
                 <NavLink to='/'><LogoSvg/></NavLink>
             </div>
@@ -49,7 +51,6 @@ const SideNav = ({ loginPopState, toggleLoginPopUp, currentUser }) =>{
             </ul>            
             
             {
-                
                 currentUser ? (
                     <div className="user"> 
                         <NavLink activeClassName='active-link' className='nav-link' to='/profile'>
@@ -58,16 +59,12 @@ const SideNav = ({ loginPopState, toggleLoginPopUp, currentUser }) =>{
                         </NavLink>
                     </div>
                     ) 
-                    : 
-                        (<div className='user' onClick={() => { toggleLoginPopUp(); console.log('clicked') }}>
-                            <UserSvg className='svg-icon' />
-                            <span>Login</span>
-                        </div>)
-                
+                : 
+                    (<div className='user' onClick={() => { toggleSignInSignOutState(); }}>
+                        <UserSvg className='svg-icon' />
+                        <span>Login</span>
+                    </div>)
             }
-            
-                    
-            
 
             <div className="legal">
                 &copy; {new Date().getFullYear()} by Davies Esiro. All rights reserved.
@@ -76,12 +73,12 @@ const SideNav = ({ loginPopState, toggleLoginPopUp, currentUser }) =>{
     );
 }
 const mapStateToProps = createStructuredSelector({
-    loginPopState: selectPop,
+    modalState: selectModal,
     currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({
-    toggleLoginPopUp: () => dispatch(showPop())
+    toggleSignInSignOutState: () => dispatch(showSignSignOut())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideNav);

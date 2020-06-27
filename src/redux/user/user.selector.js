@@ -4,12 +4,12 @@ const selectUser = state => state.user;
 
 export const selectCurrentUser = createSelector(
     [selectUser],
-    user => user.currentUser
+    user => user.currentUser? user.currentUser:null
 );
 
 export const selectUserEvents = createSelector(
     [selectUser],
-    user => user ? user.events : []
+    user => user.events ? user.events : []
 );
 
 export const selectUserPositions = createSelector(
@@ -17,7 +17,11 @@ export const selectUserPositions = createSelector(
     user => user ? user.positions : []
 );
 
-export const selectPop = createSelector(
+export const selectIsOnLoginForm = createSelector(
     [selectUser],
-    user => user.showPop
+    user => user.isOnLoginForm
+);
+export const selectSignInSignOut = createSelector(
+    [selectUser],
+    user => user.showSignInSignOut
 );

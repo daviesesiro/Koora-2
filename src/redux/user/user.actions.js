@@ -15,6 +15,10 @@ export const setUserPositions = (positions) => ({
     payload: positions
 });
 
-export const showPop = () => ({
-    type: UserActionTypes.POP_SHOW
+export const showSignSignOut = () => ({
+    type: UserActionTypes.SHOW_SIGNIN_SIGNOUT
+});
+
+export const switchForm = () => ({
+    type: UserActionTypes.FORM_SWITCH
 });

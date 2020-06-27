@@ -1,7 +1,7 @@
 import React, {useState} from 'react'; 
 
 import FormInput from '../form-input/form-input.component';
-import Button from '../button/button.component';
+import Button2 from '../button/button2.component';
 
 import './sign-up.styles.scss'
 import { auth } from '../../firebase/firebase.utils';
@@ -21,13 +21,13 @@ const SignUp = () => {
 
 
         if(password !== confirmPassword){
-            alert("passwords don't match");
-            return;
+            return setUserCredentials({...userCredentials, error:"Passwords don't match" });
         }
         
         try{
             const { user } = await auth.createUserWithEmailAndPassword(email, password);
-            console.log('created user', user);
+            setUserCredentials({...userCredentials, error: ''})
+
         }catch(error){
             setUserCredentials({...userCredentials, error: error.message})
         }
@@ -39,11 +39,21 @@ const SignUp = () => {
     }
 
     return(
-        <div className='sign-up'>
-            <h2 className="title">I do not have a account</h2>
-            <h4>Sign up with your email and password</h4>
+        <>
+            <h2 className="sign-up-title">I do not have a account</h2>
+            <h4 className='sign-up-subhead'>Sign up with your email and password</h4>
 
             <form className="sign-up-form" onSubmit={handleSubmit}>
+                <p
+                    style={{
+                        color: 'rgb(100,0,0)', 
+                        transform: 'translateY(2rem)',
+                        fontSize: '.8rem',
+                        textAlign: 'center'
+                    }}
+                >
+                    {userCredentials.error}
+                </p>
                 <FormInput
                     type="email"
                     name="email"
@@ -68,10 +78,10 @@ const SignUp = () => {
                     label="Confirm Password"
                     required
                 />
-                <Button type='submit'>SIGN UP</Button> 
+                <Button2 isBig color='red' type='submit'>SIGN UP</Button2> 
             </form>
-            <p style={{ color:'rgb(100,0,0)' }}>{userCredentials.error}</p>
-        </div>
+            
+        </>
     )
 }
 

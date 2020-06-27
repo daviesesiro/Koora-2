@@ -1,0 +1,63 @@
+.button2,.button2:focus{
+    outline: unset;
+    padding: .51rem;
+    font-size: .8rem;
+    font-weight: 700;
+    border-radius: 9px;
+    width: fit-content;
+    box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.562);
+    user-select: none;
+    transition: .2s ;
+    border: 0;
+    user-select: none;
+    color: white;
+
+    &.big{
+        padding: 1rem;
+        font-size: 1rem;
+    }
+    &.blue{
+        background-color: #283593;
+
+        &:hover{
+            background-color: darken($color: #283593, $amount: 5);
+        }
+
+        &:active{
+            background-color: darken($color: #283593, $amount: 10);
+        }
+    }&.red-1{
+        background-color: #283593;
+        border-radius:unset;
+
+        &:hover{
+            background-color: darken($color: #283593, $amount: 5);
+        }
+
+        &:active{
+            background-color: darken($color: #283593, $amount: 10);
+        }
+    }
+    &.red{
+        background-color: #ad1457;
+
+        &:hover{
+            background-color: darken($color: #ad1457, $amount: 5);
+        }
+
+        &:active{
+            background-color: darken($color: #ad1457, $amount: 10);
+        }
+    }
+
+    &:hover{
+        box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.712);
+        transform: translateY(-1px);
+
+    } &:active{
+        box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.349);
+        transform: translateY(1px);
+        border: unset;
+        outline: unset;
+    }
+}

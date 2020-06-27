@@ -1,24 +1,14 @@
-.signin{
-    max-width: 100%;
 
-    .form-control{
-        // border: 2px solid rgb(83, 123, 255);
-
-    }
-    .button-container{
-        display: flex;
-        justify-content: space-evenly;
-
-        button{
-            color:rgb(19, 94, 117);
-            border-radius: unset;
-            background-color: rgba(117, 192, 241, 0.993);
-            
-            &:last-child{
-                background-color: #4c8bf5;
-                color: white;
-                font-weight: 400;
-            }
-        }
-    }
+.button-container{
+    display: flex;
+    justify-content: space-evenly;
 }
+.signin-title{
+    text-align: center;
+    margin-top:1rem;
+}.signin-subhead{
+    text-align: center;
+    margin: 0 auto;
+    font-weight: 100;
+}
+

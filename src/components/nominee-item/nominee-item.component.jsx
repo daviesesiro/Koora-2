@@ -1,4 +1,7 @@
 import React from 'react';
+
+import Button1 from '../button/button1.component';
+
 import './nominee-item.styles.scss';
 
 const NomineeItem = ({ nominee: { votes, name, id, }, handleVote, isEnabled}) => {
@@ -10,7 +13,7 @@ const NomineeItem = ({ nominee: { votes, name, id, }, handleVote, isEnabled}) =>
             <span className='nominee-votes'>{votes}</span>
             <div className='card-bottom'>
                 <div className='nominee-name'>{name}</div>
-                <button onClick={(e)=>handleVote(id,e)}>Vote</button>
+                <Button1 onClick={(e)=>handleVote(id,e)}>Vote</Button1>
             </div>
         </div>
     );

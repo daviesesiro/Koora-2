@@ -1,0 +1,26 @@
+.switch{
+    display: inline-block;
+    padding:.4rem;
+    color: white;
+    font-size: 1rem;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    cursor: pointer;
+    transition: .2s;
+    animation: colorSwitch 10s infinite;
+    @keyframes colorSwitch {
+        0%,100%{
+            background: #c2185b;
+        }50%{
+            background-color: #283593;
+        }
+    }
+    &:hover{
+        transform: scale(.9);
+    }
+    @media (max-width:500px){
+        bottom: 25%;
+        cursor: default;
+    }
+}
