@@ -46,16 +46,14 @@ class App extends React.Component{
           <CreatePop/>
           <SideNav />
           <MobileNav />
-          <LocationFade className='ff'>
             <Switch>
               <Route exact path='/' component={HomePage}/>
               <Route exact path='/about' component={AboutPage}/>
               <Route path='/events' component={EventPage}/>
               <Route path='/profile' component={ProfilePage}/>
               </Switch>
-          </LocationFade>
         </div>
-      </div>
+      </div> 
     );
   }
 }
