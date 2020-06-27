@@ -18,9 +18,10 @@ class PositionsPage extends React.Component{
 
     getData = () => {
         this.setState({loading:true});
-        const { match, setPosition } = this.props;
+        const { match, setPosition, positions } = this.props;
         db.collection('positions').where('eventId', '==', `${match.params.eventId}`).get().then((snapShot) => {          
-            setPosition(snapShot.docs.map(doc=>({id: doc.id,...doc.data() })));
+            setPosition(snapShot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+            console.log(positions)
             this.setState({loading:false});
         });
     }
