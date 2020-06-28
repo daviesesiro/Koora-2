@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 import './event-item.styles.scss';
 
-const EventItem = ({handleClick, name, end_at,start_at, isProfile = false}) => (
-    <div className='event-item' onClick={handleClick}>
+const EventItem = ({name, end_at,start_at, isProfile = false}) => (
+    <div className='event-item'>
         <div className='event-image' />
         {isProfile?<Link className='event-item-link' to='/events'> hi </Link>: null }
         

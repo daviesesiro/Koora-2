@@ -7,6 +7,7 @@
     border: 3px dotted #2986ad;
     box-shadow: 8px 2px 1rem 1px rgba(0, 0, 0, 0.562);
     user-select: none;
+    color: black;
     transition:  
         transform cubic-bezier(0.6, -0.28, 0.735, 0.045) .4s,
         border cubic-bezier(0.6, -0.28, 0.735, 0.045) .2s,
@@ -50,5 +51,17 @@
         transform: translate(-50%) scale(3);
     }
     
-
+    .delete-item{
+        position: absolute;
+        bottom: -10%;
+        right: -3%;
+        fill: red;
+        background-color: black;
+        border-radius: 50%;
+        width: 2rem;
+        transition: 0.2s;
+        &:hover{
+            transform: scale(1.3);
+        }
+    }
 }

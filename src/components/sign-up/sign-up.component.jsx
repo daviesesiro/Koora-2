@@ -78,7 +78,7 @@ const SignUp = () => {
                     label="Confirm Password"
                     required
                 />
-                <Button2 isBig color='red' type='submit'>SIGN UP</Button2> 
+                <Button2 size='big1' color='red' type='submit'>SIGN UP</Button2> 
             </form>
             
         </>

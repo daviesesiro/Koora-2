@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import Button1 from '../button/button1.component';
 import ReactTypingEffect from 'react-typing-effect';
 import './slider-item.styles.scss';
@@ -21,7 +21,7 @@ const SliderItem = () => (
                     eraseDelay={1000}
                 />
             </span><br/>
-            <Button1>View Latest events</Button1>
+            <Link to='events/'><Button1>View Latest events</Button1></Link>
         </div>
     </div>
 );

@@ -1,11 +1,15 @@
 .side-nav{
     background-color: #01050d;
-    flex: 0 0 10%;
-    // min-width: 12%;
+    position: fixed;
+    left: 0;
+    top: 0;
     height: 100vh;
+    max-width: 15%;
+    min-width: 116px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    z-index: 10;
 
     & .side-list{        
         flex-direction: column;
@@ -105,8 +109,8 @@
         width: 9rem;
         margin: 2rem auto 0 auto;
     }
-   @media screen and (max-width: 500px) {
+    @media screen and (max-width: 500px) {
         display:none;
         
-   }
+    }
 }

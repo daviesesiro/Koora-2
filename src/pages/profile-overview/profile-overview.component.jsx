@@ -14,6 +14,7 @@ import EventItem from '../../components/event-item/event-item.component';
 import Modal from '../../components/modal/modal.component';
 
 import './profile-overview.styles.scss';
+import { Link } from 'react-router-dom';
 
 class ProfileOverview extends React.Component {
     state = {
@@ -25,14 +26,11 @@ class ProfileOverview extends React.Component {
         document.title = `Koora | ${currentUser.email}`;
         this.setState({ loading: true });
         
-        let events = [];
         if(currentUser){
             db.collection('events').where('userId', "==", `${currentUser.userId}`)
                 .orderBy('start_at', 'desc').get().then((snapshot) => {
-                snapshot.docs.forEach((doc) => {
-                    events.push({ id: doc.id, ...doc.data() })
-                })
-                setEvents(events);
+                
+                setEvents(snapshot.docs.map(doc=>({id: doc.id,...doc.data()})));
                 this.setState({ loading: false });            
             });
         }
@@ -71,11 +69,14 @@ class ProfileOverview extends React.Component {
                     <hr/>
                     <h3 className='sub-head'>These are your events</h3>
                 </div>
+
                 <div className="event-items-container">
                     {(!loading) ?
                         <div className='event-items'>
                             {userEvents.map(({ id, ...otherProps }) => (
-                            <EventItem handleClick={()=>history.push(`${match.path}/${id}`)} key={id} {...otherProps} />
+                                <Link key={id} to={`${match.path}/${id}`}>
+                                    <EventItem {...otherProps} />
+                                </Link>
                             ))}
                         </div>
                     :

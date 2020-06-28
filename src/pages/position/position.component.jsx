@@ -11,6 +11,7 @@ import Spinner from '../../components/spinner/spinner.component';
 import PositionItem from '../../components/position-item/position-item.component';
 
 import './position.styles.scss';
+import { Link } from 'react-router-dom';
 class PositionsPage extends React.Component{    
     state = {
         loading: true,
@@ -19,13 +20,8 @@ class PositionsPage extends React.Component{
     getData = async() => {
         this.setState({loading:true});
         const { match, setPosition } = this.props;
-        db.collection('positions').where('eventId', '==', `${match.params.eventId}`).get().then((snapShot) => {          
-            let positionsA = [];
-            snapShot.docs.forEach((doc) => {
-                positionsA.push({ id: doc.id, ...doc.data() })
-            });
-            setPosition(positionsA);
-            console.log(positionsA);
+        db.collection('positions').where('eventId', '==', `${match.params.eventId}`).get().then((snapshot) => {   
+            setPosition(snapshot.docs.map(doc=>({id: doc.id, ...doc.data()})));
             this.setState({loading:false});
         });
     }
@@ -48,7 +44,9 @@ class PositionsPage extends React.Component{
                 <div className='position-items'>
                     {
                         positions.map(({id, ...otherProps}) =>(
-                            <PositionItem handleClick={()=>history.push(`${match.url}/${id}`)} key={id} {...otherProps} />
+                            <Link key={id} to={`${match.url}/${id}`}>
+                                <PositionItem {...otherProps} />
+                            </Link>
                         ))
                     }
                 </div>

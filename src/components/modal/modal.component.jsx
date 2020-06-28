@@ -18,7 +18,7 @@ export const Modal = ({ title, modalState, toggleModal, children }) => {
     
     return (
         <div onClick={(e)=>overlayClick(e)} className={`${modalState? 'show': 'disappear'} modal-overlay`}>
-            <div className={`${modalState?'show':'disappear'} modal-content`}>
+            <div className={`modal-content`}>
                 <CloseSvg onClick={() => toggleModal()} className='close-svg' />
                 <h1 className='modal-title'>{title}</h1>
 

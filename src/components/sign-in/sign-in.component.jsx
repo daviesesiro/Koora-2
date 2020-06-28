@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {auth} from '../../firebase/firebase.utils';
 
 import FormInput from '../form-input/form-input.component';
-import Button1 from '../button/button1.component';
+import Button2 from '../button/button2.component';
 
 import './sign-in.styles.scss'
 
@@ -52,8 +52,8 @@ const SignIn = ({switchForm}) => {
                     handleChange={handleChange}
                 />      
                 <div className='button-container'>
-                    <Button1>Sign In</Button1>
-                    <Button1>Google sign in</Button1>
+                    <Button2 size='big2' color='blue'>Sign In</Button2>
+                    <Button2 size='big2' color='blue-g'>Google sign in</Button2>
                 </div>
             </form>
         </>

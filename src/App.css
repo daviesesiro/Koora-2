@@ -1,13 +1,9 @@
 .app{
-  position: unset;
-  margin: 0rem auto;
-  background: white;
-  /* overflow-y: scroll; */
+	position: unset;
+	margin: 0rem auto;
+	background: white;
 }
 
-.content{ 
-  display: flex;
-  max-width: 100rem;
-  margin: auto;
+.pages{
+	margin-left: 15%;
 }
-

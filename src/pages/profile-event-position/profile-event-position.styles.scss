@@ -1,7 +1,6 @@
 .profile-event-page{    
     background-color: rgb(22, 25, 36);;
     height: 100vh;
-    overflow-y: scroll;
     width: 100%;
     padding-top: 1rem;
     position: relative;
@@ -19,7 +18,7 @@
         &:hover{
             text-decoration: double underline;
         }
-    }
+    }   
 
     .sucker-msg{
         position: absolute;
@@ -56,51 +55,8 @@
         justify-content: center;
         margin: 4rem auto 4rem;
         
-        & div{
+        & button{
             margin-right: 2rem;
-        }
-    }
-
-    .btn{
-        padding: 1rem;
-        font-size: 1rem;
-        color: white;
-        font-weight: 700;
-        border-radius: 9px;
-        width: fit-content;
-        box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.562);
-        user-select: none;
-        transition: .1s ;
-        &:hover{
-            box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.712);
-            transform: translateY(-1px);
-
-        } &:active{
-            box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.349);
-            transform: translateY(2px);
-        }
-    }
-
-    .delete{
-        background-color: #ad1457;
-
-        &:hover{
-            background-color: darken($color: #ad1457, $amount: 5);
-        }
-
-        &:active{
-            background-color: darken($color: #ad1457, $amount: 10);
-        }
-    }
-    .add{
-        background-color: #283593;
-
-        &:hover{
-            background-color: darken($color: #283593, $amount: 5);
-        }
-
-        &:active{
-            background-color: darken($color: #283593, $amount: 10);
         }
     }
 

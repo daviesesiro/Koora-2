@@ -12,9 +12,13 @@
     user-select: none;
     color: white;
 
-    &.big{
+    &.big2{
         padding: 1rem;
         font-size: 1rem;
+    }
+    &.big1{
+        padding: .9rem;
+        font-size: .9rem;
     }
     &.blue{
         background-color: #283593;
@@ -26,7 +30,19 @@
         &:active{
             background-color: darken($color: #283593, $amount: 10);
         }
-    }&.red-1{
+    }
+    &.blue-g{
+        background-color: #4c8bf5;
+
+        &:hover{
+            background-color: darken($color: #4c8bf5, $amount: 5);
+        }
+
+        &:active{
+            background-color: darken($color: #4c8bf5, $amount: 10);
+        }
+    }
+    &.red-1{
         background-color: #283593;
         border-radius:unset;
 
@@ -49,6 +65,7 @@
             background-color: darken($color: #ad1457, $amount: 10);
         }
     }
+
 
     &:hover{
         box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.712);

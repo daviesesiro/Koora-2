@@ -11,6 +11,7 @@ import Spinner from '../../components/spinner/spinner.component';
 import FormInput from '../../components/form-input/form-input.component';
 import EventItem from '../../components/event-item/event-item.component';
 import './events.styles.scss';
+import { Link } from 'react-router-dom';
 class EventsPage extends React.Component{
     state = {
         loading: true,
@@ -31,9 +32,9 @@ class EventsPage extends React.Component{
     }
     componentDidMount() {
         const { pageEvents } = this.props;
-        if(!pageEvents)
+        if(!pageEvents){
             this.getData();
-        
+        }
         this.setState({loading:false});
     }
 
@@ -48,7 +49,7 @@ class EventsPage extends React.Component{
     }
 
     render() {
-        const { pageEvents } = this.props; 
+        const { pageEvents,match } = this.props; 
 
         if (this.state.loading) return (<Spinner/>)
         
@@ -65,7 +66,10 @@ class EventsPage extends React.Component{
                     <div className='event-items'>
                         {
                             pageEvents && pageEvents.map(({ id, ...otherProps }) => {
-                                return <EventItem key={id} {...otherProps} handleClick={() => this.handleClick(id)} />
+                                return(
+                                    <Link to={`${match.path}/${id}`} key={id} >
+                                        <EventItem {...otherProps} />
+                                    </Link>)
                             })
                         }
                     </div>

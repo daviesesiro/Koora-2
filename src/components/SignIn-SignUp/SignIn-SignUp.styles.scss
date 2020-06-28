@@ -1,14 +1,12 @@
 .switch{
-    display: inline-block;
     padding:.4rem;
     color: white;
     font-size: 1rem;
-    position: absolute;
-    right: 1rem;
-    bottom: 1rem;
+    width: fit-content;
+    margin: 2rem 0 0 auto;
     cursor: pointer;
     transition: .2s;
-    animation: colorSwitch 10s infinite;
+    animation: colorSwitch 20s infinite;
     @keyframes colorSwitch {
         0%,100%{
             background: #c2185b;

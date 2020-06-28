@@ -13,7 +13,6 @@ import App from './App';
 
 
 ReactDOM.render(
-  // <React.StrictMode>
   <Provider store={store}>
     <BrowserRouter>
       <PersistGate persistor={persistor}>
@@ -23,7 +22,6 @@ ReactDOM.render(
   </Provider>
 
 
-  // </React.StrictMode>
   ,document.getElementById('root')
 );
 

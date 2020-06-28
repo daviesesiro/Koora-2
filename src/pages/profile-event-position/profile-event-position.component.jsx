@@ -15,6 +15,7 @@ import EventForm from '../../components/event-form/event-form.component';
 import Spinner from '../../components/spinner/spinner.component';
 
 import './profile-event-position.styles.scss';
+import Button2 from '../../components/button/button2.component';
 
 class ProfileEventPositionPage extends React.Component{
     state = {
@@ -54,8 +55,8 @@ class ProfileEventPositionPage extends React.Component{
                 </div>
                 {createdBy === currentUser.userId ?
                     <div className='btn-container'>
-                        <div onClick={()=>toggleModal()} className='btn add'>Add Position</div>
-                        <div className='btn delete'>Toggle Delete</div>
+                        <Button2 size='big2' color='blue' onClick={()=>toggleModal()} className='btn add'>Add Position</Button2>
+                        <Button2 size='big2' color='red' className='btn delete'>Toggle Delete</Button2>
                     </div>
                     : <div className='sucker-msg'><p>You are not supposed to be here sucker!!!</p></div>
                 }

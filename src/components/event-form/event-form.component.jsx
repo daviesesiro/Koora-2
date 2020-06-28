@@ -23,19 +23,25 @@ export const EventForm = () => {
     }
     return (
         <div className='event-form'>
-            <FormInput
-                name='name'
-                value={eventName}
-                label={'Event Name'}
-                handleChange={handleChange}
-            />
-            <input
-                style={{ display: 'none' }}
-                onChange={()=>handleFile()}
-                className='file'
-                type='file'
-            />
-            <Button2 color='red-1' handleClick={()=>handleFileButton()}>Upload Image</Button2>
+            <form>
+                <FormInput
+                    name='name'
+                    value={eventName}
+                    label={'Event Name'}
+                    handleChange={handleChange}
+                />
+                <input
+                    style={{ display: 'none' }}
+                    onChange={(e)=>handleFile(e)}
+                    className='file'
+                    type='file'
+                />
+                <Button2 size='big1' color='red' handleClick={() => handleFileButton()}>Upload Image</Button2>
+                <span className='file-name'>{file && file.name}</span>
+                <div className='submit'>
+                    <Button2 className='submit' size='big2' color='blue'>Add Event</Button2>
+                </div>                
+            </form>
         </div>
     )
 }
