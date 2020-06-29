@@ -7,7 +7,7 @@ import Button2 from '../button/button2.component';
 
 import './sign-in.styles.scss'
 
-const SignIn = ({switchForm}) => {
+const SignIn = () => {
     const [userCredentials, setCredentials] = useState({
         email:'', 
         password: '',

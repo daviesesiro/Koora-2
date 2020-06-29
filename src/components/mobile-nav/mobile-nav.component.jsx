@@ -3,12 +3,9 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
-import {switchForm, showSignSignOut } from '../../redux/user/user.actions';
+import {toggleSignInSignUp } from '../../redux/modal/modal.actions';
 import {selectCurrentUser } from '../../redux/user/user.selector';
-import { selectModal } from '../../redux/event/event.selector';
 
-import { Modal } from '../modal/modal.component';
-import SignInSignUp from '../SignIn-SignUp/SignIn-SignUp.component';
 import { ReactComponent as HomeSvg } from '../../svgicon/home.svg';
 import { ReactComponent as EventSvg } from '../../svgicon/server.svg';
 import { ReactComponent as PlaceSvg } from '../../svgicon/map.svg';
@@ -41,12 +38,11 @@ const MobileNav = ({ toggleSignSignOut, currentUser }) => (
 );
 
 const mapStateToProps = createStructuredSelector({
-    modalState: selectModal,
     currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({
-    toggleSignSignOut : () => dispatch(showSignSignOut())
+    toggleSignSignOut : () => dispatch(toggleSignInSignUp())
 })
 
 

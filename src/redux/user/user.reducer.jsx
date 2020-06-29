@@ -1,43 +1,57 @@
 import userActionTypes from './user.types';
 
 const INITIAL_STATE = {
-    currentUser: {},
+    currentUser: null,
     events: null,
     positions: null,
-    nominee: null,
-    showSignInSignOut: false,
-    isOnLoginForm: true
+    nominees: null,
+    isFetching: false,
+    errorMessage: ''
 }
 
 export const userReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case userActionTypes.SET_CURRENT_USER:
+        case userActionTypes.USER_ACTION_START:
             return {
-                ...state, 
-                currentUser: action.payload,
-                showSignInSignOut: false
+                ...state,
+                isFetching: true,
+                errorMessage:''
             };
-        case userActionTypes.SET_USER_EVENTS:
+        case userActionTypes.USER_ACTION_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                errorMessge: action.payload
+            };
+
+        case userActionTypes.SET_CURRENT_USER_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                currentUser: action.payload,
+                errorMessage:''
+            };
+        case userActionTypes.SET_USER_EVENTS_SUCCESS:
             return {
                 ...state, 
                 events: action.payload,
-                showSignInSignOut: false
+                errorMessage:''
             };
-        case userActionTypes.SET_USER_POSITIONS:
+
+        case userActionTypes.SET_USER_POSITIONS_SUCCESS:
             return {
                 ...state, 
+                isFetching: false,
                 positions: action.payload,
-                showSignInSignOut: false
+                errorMessage: ''
             };
-        case userActionTypes.FORM_SWITCH:
+
+        case userActionTypes.SET_USER_NOMINEES_SUCCESS:
             return {
                 ...state, 
-                isOnLoginForm: !state.isOnLoginForm
-            };
-        case userActionTypes.SHOW_SIGNIN_SIGNOUT:
-            return {
-                ...state, 
-                showSignInSignOut: !state.showSignInSignOut
+                isFetching: false,
+                nominees: action.payload,
+                errorMessage: ''
             };
         default:
             return state;

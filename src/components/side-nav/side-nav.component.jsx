@@ -4,27 +4,20 @@ import { NavLink } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
 import {selectCurrentUser } from '../../redux/user/user.selector';
-import { toggleModal } from '../../redux/event/event.actions';
-import { selectModal } from '../../redux/event/event.selector';
+import { toggleSignInSignUp } from '../../redux/modal/modal.actions';
 
-import { Modal } from '../modal/modal.component';
-import SignInSignUp from '../SignIn-SignUp/SignIn-SignUp.component';
 import { ReactComponent as HomeSvg } from '../../svgicon/home.svg';
 import { ReactComponent as EventSvg } from '../../svgicon/server.svg';
 import { ReactComponent as AboutSvg } from '../../svgicon/info.svg';
 import { ReactComponent as UserSvg } from '../../svgicon/user.svg';
 import { ReactComponent as LogoSvg } from '../../svgicon/KooraLogoWeb.svg';
 import './side-nav.styles.scss';
-import { showSignSignOut } from '../../redux/user/user.actions';
 
 
 const SideNav = ({ modalState, toggleSignInSignOutState, currentUser }) =>{
     
     return (
         <nav className='side-nav'>
-            <Modal modalState={modalState} toggleModal={toggleSignInSignOutState}>
-                <SignInSignUp />  
-            </Modal>
             <div className='logo'>
                 <NavLink to='/'><LogoSvg/></NavLink>
             </div>
@@ -51,7 +44,7 @@ const SideNav = ({ modalState, toggleSignInSignOutState, currentUser }) =>{
             </ul>            
             
             {
-                currentUser ? (
+                currentUser && currentUser ? (
                     <div className="user"> 
                         <NavLink activeClassName='active-link' className='nav-link' to='/profile'>
                             <UserSvg className='svg-icon' />
@@ -73,12 +66,11 @@ const SideNav = ({ modalState, toggleSignInSignOutState, currentUser }) =>{
     );
 }
 const mapStateToProps = createStructuredSelector({
-    modalState: selectModal,
     currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = dispatch => ({
-    toggleSignInSignOutState: () => dispatch(showSignSignOut())
+    toggleSignInSignOutState: () => dispatch(toggleSignInSignUp())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideNav);

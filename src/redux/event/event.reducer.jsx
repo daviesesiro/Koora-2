@@ -1,10 +1,9 @@
 import eventActionTypes from './event.types';
 
 const INITIAL_STATE = {
-    events: null,
+    events: [],
     positions: [],
-    nominees: null,
-    showModal: false
+    nominees: []
 };
 
 export const eventReducer = (state = INITIAL_STATE, action)=>{
@@ -24,12 +23,6 @@ export const eventReducer = (state = INITIAL_STATE, action)=>{
                 ...state,
                 nominees: action.payload
             };        
-        case eventActionTypes.SHOW_MODAL:
-            return {
-                ...state,
-                showModal: !state.showModal
-            };
-        
         default:
             return state;
     }

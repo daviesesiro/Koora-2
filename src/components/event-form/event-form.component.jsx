@@ -18,8 +18,7 @@ export const EventForm = () => {
     }
 
     const handleFileButton = () => {
-        let fileInput = document.querySelector('.event-form .file');
-        fileInput.click();
+        document.querySelector('.event-form .file').click();
     }
     return (
         <div className='event-form'>
@@ -36,7 +35,7 @@ export const EventForm = () => {
                     className='file'
                     type='file'
                 />
-                <Button2 size='big1' color='red' handleClick={() => handleFileButton()}>Upload Image</Button2>
+                <Button2 type='button' size='big1' color='red' handleClick={() => handleFileButton()}>Upload Image</Button2>
                 <span className='file-name'>{file && file.name}</span>
                 <div className='submit'>
                     <Button2 className='submit' size='big2' color='blue'>Add Event</Button2>

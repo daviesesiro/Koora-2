@@ -17,7 +17,3 @@ export const selectNominees = createSelector(
     event => event.nominees
 );
 
-export const selectModal = createSelector(
-    [selectEvent],
-    event => event.showModal
-);

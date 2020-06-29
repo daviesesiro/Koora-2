@@ -1,24 +1,31 @@
 import UserActionTypes from './user.types';
 
-export const setCurrentUser = (user) => ({
-    type: UserActionTypes.SET_CURRENT_USER,
+export const userActionStart = () => ({
+    type: UserActionTypes.USER_ACTION_START
+});
+
+export const userActionFailure = (error) => ({
+    type: UserActionTypes.USER_ACTION_FAILURE,
+    payload: error.message
+});
+
+export const setCurrentUserSuccess = (user) => ({
+    type: UserActionTypes.SET_CURRENT_USER_SUCCESS,
     payload: user
 });
 
-export const setUserEvents = (events) => ({
-    type: UserActionTypes.SET_USER_EVENTS,
+export const setUserEventsSuccess = (events) => ({
+    type: UserActionTypes.SET_USER_EVENTS_SUCCESS,
     payload: events
 });
 
-export const setUserPositions = (positions) => ({
-    type: UserActionTypes.SET_USER_POSITIONS,
+export const setUserPositionsSuccess = (positions) => ({
+    type: UserActionTypes.SET_USER_POSITIONS_SUCCESS,
     payload: positions
 });
 
-export const showSignSignOut = () => ({
-    type: UserActionTypes.SHOW_SIGNIN_SIGNOUT
+export const setUserNomineesSuccess = (nominees) => ({
+    type: UserActionTypes.SET_USER_POSITIONS,
+    payload: nominees
 });
 
-export const switchForm = () => ({
-    type: UserActionTypes.FORM_SWITCH
-});

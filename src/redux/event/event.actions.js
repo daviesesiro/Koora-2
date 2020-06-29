@@ -14,7 +14,3 @@ export const setNominees = (nominees) => ({
     type: eventActionTypes.SET_NOMINEES,
     payload: nominees
 });
-
-export const toggleModal = () => ({
-    type: eventActionTypes.SHOW_MODAL
-});

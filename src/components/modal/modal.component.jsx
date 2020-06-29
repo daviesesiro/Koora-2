@@ -1,10 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import { createStructuredSelector } from 'reselect';
-import { selectModal } from '../../redux/event/event.selector';
 import { ReactComponent as CloseSvg } from '../../svgicon/cross.svg'
-import { toggleModal } from '../../redux/event/event.actions';
+// import { toggleModal } from '../../redux/modal/modal.actions';
 
 import './modal.styles.scss';
 
@@ -29,12 +26,4 @@ export const Modal = ({ title, modalState, toggleModal, children }) => {
     )        
 }
 
-const mapStateToProps = createStructuredSelector({
-    modalState: selectModal
-});
-
-const mapDispatchToProps = dispatch => ({
-    toggleModal: () => dispatch(toggleModal())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);
+export default Modal;

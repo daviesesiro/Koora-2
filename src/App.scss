@@ -6,4 +6,8 @@
 
 .pages{
 	margin-left: 15%;
+
+	@media (max-width: 500px){
+		margin-left: 0;
+	}
 }
