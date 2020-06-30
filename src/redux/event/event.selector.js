@@ -17,3 +17,7 @@ export const selectNominees = createSelector(
     event => event.nominees
 );
 
+export const selectIsFetching = createSelector(
+    [selectEvent],
+    event => event.isFetching
+)

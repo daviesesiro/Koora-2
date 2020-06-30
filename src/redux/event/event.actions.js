@@ -1,16 +1,25 @@
 import eventActionTypes from './event.types';
 
-export const setEvents = (events) => ({
-    type: eventActionTypes.SET_EVENTS,
+export const fetchStart = () => ({
+    type: eventActionTypes.FETCH_START
+})
+
+export const fetchFailure = (error) => ({
+    type: eventActionTypes.FETCH_FAILURE,
+    payload: error.message
+})
+
+export const setEventsSuccess = (events) => ({
+    type: eventActionTypes.SET_EVENTS_SUCCESS,
     payload: events
 });
 
-export const setPositions = (positions) => ({
-    type: eventActionTypes.SET_POSITIONS,
+export const setPositionsSuccess = (positions) => ({
+    type: eventActionTypes.SET_POSITIONS_SUCCESS,
     payload: positions
 });
 
-export const setNominees = (nominees) => ({
-    type: eventActionTypes.SET_NOMINEES,
+export const setNomineesSuccess = (nominees) => ({
+    type: eventActionTypes.SET_NOMINEES_SUCCESS,
     payload: nominees
 });

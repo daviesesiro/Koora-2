@@ -2,9 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { db } from '../../firebase/firebase.utils';
-import { setEvents } from '../../redux/event/event.actions';
-import { selectEvents } from '../../redux/event/event.selector';
+import { fetchEventsAsync } from '../../redux/event/event.async';
+import { selectEvents, selectIsFetching } from '../../redux/event/event.selector';
 
 import { ReactComponent as RefreshSvg } from '../../svgicon/refresh.svg';
 import Spinner from '../../components/spinner/spinner.component';
@@ -14,28 +13,14 @@ import './events.styles.scss';
 import { Link } from 'react-router-dom';
 class EventsPage extends React.Component{
     state = {
-        loading: true,
         searchField: ''
     }
 
-    getData() {
-        this.setState({loading:true})
-        const {setEvents } = this.props;    
-        let events = [];
-        db.collection('events').get().then((snapshot) => {
-            snapshot.docs.forEach((doc) => {
-                events.push({id: doc.id, ...doc.data() });
-            })
-            setEvents(events);
-            this.setState({loading:false});
-        });     
-    }
     componentDidMount() {
-        const { pageEvents } = this.props;
-        if(!pageEvents){
-            this.getData();
+        const { events, fetchEventsAsync } = this.props;
+        if(!events){
+            fetchEventsAsync()
         }
-        this.setState({loading:false});
     }
 
     handleChange = (e) => {
@@ -43,36 +28,35 @@ class EventsPage extends React.Component{
             searchField: e.target.value
         })
     }
-    handleClick = (eventId) => {
-        const { history, match } = this.props;
-        history.push(`${match.path}/${eventId}`)
-    }
 
     render() {
-        const { pageEvents,match } = this.props; 
-
-        if (this.state.loading) return (<Spinner/>)
+        const { events,match, isFetching, fetchEventsAsync} = this.props; 
         
         return (
             <div className="events-page">
                 <div className='event-content-all'>  
                     <div className='top-content'>
-                        <RefreshSvg onClick={()=> this.getData()} className='refresh-svg'/>
+                        <RefreshSvg onClick={()=>fetchEventsAsync()} className='refresh-svg'/>
                         <div className='search'>                        
-                            <FormInput handleChange={(e)=>this.handleChange(e)} label="Search Events..." value={this.state.searchField} />
+                            <FormInput
+                                handleChange={(e) => this.handleChange(e)}
+                                label="Search Events..."
+                                value={this.state.searchField} />
                         </div>
                     </div>    
-
-                    <div className='event-items'>
-                        {
-                            pageEvents && pageEvents.map(({ id, ...otherProps }) => {
-                                return(
-                                    <Link to={`${match.path}/${id}`} key={id} >
-                                        <EventItem {...otherProps} />
-                                    </Link>)
-                            })
-                        }
-                    </div>
+                    {(isFetching)? <Spinner />
+                    :
+                        <div className='event-items'>
+                            {
+                                events && events.map(({ id, ...otherProps }) => {
+                                    return(
+                                        <Link to={`${match.path}/${id}`} key={id} >
+                                            <EventItem {...otherProps} />
+                                        </Link>)
+                                })
+                            }
+                        </div>                    
+                    }
                 </div>
         
             </div>
@@ -82,11 +66,12 @@ class EventsPage extends React.Component{
 }
 
 const mapStateToProps = createStructuredSelector({
-    pageEvents: selectEvents
+    events: selectEvents,
+    isFetching : selectIsFetching
 });
 
 const mapDispatchToProps = dispatch => ({
-    setEvents: (events) => dispatch(setEvents(events))
+    fetchEventsAsync: () => dispatch(fetchEventsAsync())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventsPage);
