@@ -4,7 +4,7 @@ import Button1 from '../button/button1.component';
 
 import './nominee-item.styles.scss';
 
-const NomineeItem = ({ nominee: { votes, name, id, }, handleVote, isEnabled}) => {
+const NomineeItem = ({ nominee: { votes, name, id, }, handleVote=()=>{return null}}) => {
     return (
         <div className="nominee-item">
             <div className="img-container">

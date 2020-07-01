@@ -1,13 +1,17 @@
 import React, {useState} from 'react';
+import { connect } from 'react-redux';
 
-import {auth} from '../../firebase/firebase.utils';
+import { signInUserAsync } from '../../redux/user/user.async';
 
 import FormInput from '../form-input/form-input.component';
 import Button2 from '../button/button2.component';
 
 import './sign-in.styles.scss'
+// import Spinner from '../spinner/spinner.component';
+import { createStructuredSelector } from 'reselect';
+import { selectIsSignInBtnDisabled, selectErrorMessage } from '../../redux/user/user.selector';
 
-const SignIn = () => {
+const SignIn = ({signInUserAsync,errorMessage,isSignInBtnDisabled}) => {
     const [userCredentials, setCredentials] = useState({
         email:'', 
         password: '',
@@ -17,11 +21,7 @@ const SignIn = () => {
     const { email, password } = userCredentials;
     const handleSubmit = async event => {
         event.preventDefault();
-        try {
-            await auth.signInWithEmailAndPassword(email, password);
-        } catch (error) {
-            setCredentials({...userCredentials, error: error.message });
-        }
+        signInUserAsync(email, password)
     };
 
     const handleChange = event => {
@@ -34,7 +34,7 @@ const SignIn = () => {
             <h2 className='signin-title'>I already have an account</h2>
             <h4 className='signin-subhead'>Sign in with your email and password</h4>
             <form onSubmit={handleSubmit}>
-                <p style={{ color:'rgb(100,0,0)' }}>{userCredentials.error}</p>
+                <p style={{ color:'rgb(100,0,0)' }}>{errorMessage}</p>
                 <FormInput
                     type="email" 
                     value={email} 
@@ -52,7 +52,9 @@ const SignIn = () => {
                     handleChange={handleChange}
                 />      
                 <div className='button-container'>
-                    <Button2 size='big2' color='blue'>Sign In</Button2>
+                    <Button2 disabled={isSignInBtnDisabled} size='big2' color='blue'>
+                        {!isSignInBtnDisabled ? 'Sign In' : 'Signing...'}
+                    </Button2>
                     <Button2 size='big2' color='blue-g'>Google sign in</Button2>
                 </div>
             </form>
@@ -60,5 +62,12 @@ const SignIn = () => {
     );
     
 }
+const mapDispatch = (dispatch) => ({
+    signInUserAsync: (email, password) => dispatch(signInUserAsync(email, password)),
+})
 
-export default SignIn;
+const mapState = createStructuredSelector({
+    isSignInBtnDisabled: selectIsSignInBtnDisabled,
+    errorMessage: selectErrorMessage
+})
+export default connect(mapState, mapDispatch)(SignIn);

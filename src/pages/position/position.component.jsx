@@ -13,8 +13,10 @@ import PositionItem from '../../components/position-item/position-item.component
 import './position.styles.scss';
 class PositionsPage extends React.Component{    
     componentDidMount() {
-        const { fetchPositionsAsync } = this.props;
-        fetchPositionsAsync();
+        const { fetchPositionsAsync, match } = this.props;
+        const eventId = match.params.eventId;
+        console.log(eventId);
+        fetchPositionsAsync(eventId);
     }
 
     render() {
@@ -50,7 +52,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchPositionsAsync: () => dispatch(fetchPositionsAsync()) 
+    fetchPositionsAsync: (eventId) => dispatch(fetchPositionsAsync(eventId)) 
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PositionsPage);

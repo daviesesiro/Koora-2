@@ -1,6 +1,6 @@
-.profile-event-page{    
+.profile-nominee{    
     background-color: rgb(22, 25, 36);;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     padding-top: 1rem;
     position: relative;
@@ -9,7 +9,7 @@
         padding: 4rem 0 5rem 0;
     }
 
-    .p-position-event-name{
+    .p-nominee-name{
         color: #768a92;
         font-size: 1.4rem;
         margin: 0 auto;    
@@ -60,17 +60,14 @@
         }
     }
 
-    .p-position-items{
-        display: flex;
-        flex-direction: column;
-        align-content: space-around;
-        max-width: 75%;
-        margin: 5rem auto 0rem;   
+    .p-nominee-items{
+        display: grid;
+        max-width: 80%;
+        margin: 4rem auto 0 auto;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 2rem;
+        gap: 2rem;
+        grid-auto-rows: minmax(25rem, auto);  
         
-        
-        div{
-            margin-bottom:4rem;
-            max-height: 10rem;
-        }
     }    
 }

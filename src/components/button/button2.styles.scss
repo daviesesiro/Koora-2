@@ -11,7 +11,7 @@
     border: 0;
     user-select: none;
     color: white;
-
+    
     &.big2{
         padding: 1rem;
         font-size: 1rem;
@@ -68,7 +68,7 @@
 
 
     &:hover{
-        box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.712);
+    box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.712);
         transform: translateY(-1px);
 
     } &:active{
@@ -76,5 +76,13 @@
         transform: translateY(1px);
         border: unset;
         outline: unset;
+    }
+
+    &:disabled{        
+        background-color: grey;
+        
+        &:hover{
+            background-color: grey;
+        }
     }
 }

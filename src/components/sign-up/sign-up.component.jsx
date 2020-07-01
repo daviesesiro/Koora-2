@@ -1,36 +1,27 @@
 import React, {useState} from 'react'; 
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
+import { selectIsSignUpBtnDisabled, selectErrorMessage } from '../../redux/user/user.selector';
+import { signUpUserAsync } from '../../redux/user/user.async';
 
 import FormInput from '../form-input/form-input.component';
 import Button2 from '../button/button2.component';
 
 import './sign-up.styles.scss'
-import { auth } from '../../firebase/firebase.utils';
 
-const SignUp = () => {   
+const SignUp = ({signUpUserAsync, errorMessag, isSignUpBtnDisabled}) => {   
     const [userCredentials, setUserCredentials] = useState({
         email:'',
         password: '',
-        confirmPassword: '',
-        error: ''
+        confirmPassword: ''
     });
     
     const {email, password, confirmPassword} = userCredentials;
 
-    const handleSubmit = async event =>{
+    const handleSubmit = event =>{
         event.preventDefault();
-
-
-        if(password !== confirmPassword){
-            return setUserCredentials({...userCredentials, error:"Passwords don't match" });
-        }
-        
-        try{
-            const { user } = await auth.createUserWithEmailAndPassword(email, password);
-            setUserCredentials({...userCredentials, error: ''})
-
-        }catch(error){
-            setUserCredentials({...userCredentials, error: error.message})
-        }
+        signUpUserAsync(email, password, confirmPassword);       
     }
 
     const handleChange = event =>{
@@ -46,13 +37,11 @@ const SignUp = () => {
             <form className="sign-up-form" onSubmit={handleSubmit}>
                 <p
                     style={{
-                        color: 'rgb(100,0,0)', 
-                        transform: 'translateY(2rem)',
-                        fontSize: '.8rem',
+                        color: 'rgb(100,0,0)',
                         textAlign: 'center'
                     }}
                 >
-                    {userCredentials.error}
+                    {errorMessag}
                 </p>
                 <FormInput
                     type="email"
@@ -78,11 +67,20 @@ const SignUp = () => {
                     label="Confirm Password"
                     required
                 />
-                <Button2 size='big1' color='red' type='submit'>SIGN UP</Button2> 
+                <Button2 disabled={isSignUpBtnDisabled} size='big1' color='red' type='submit'>
+                    {!isSignUpBtnDisabled ? 'SIGN UP' : 'SIGNING UP'}
+                </Button2> 
             </form>
             
         </>
     )
 }
+const mapState = createStructuredSelector({
+    isSignUpBtnDisabled: selectIsSignUpBtnDisabled,
+    errorMessag: selectErrorMessage
+})
 
-export default SignUp;
+const mapDispatch = dispatch => ({
+    signUpUserAsync: (email, password, confirmPassword) => dispatch(signUpUserAsync(email, password, confirmPassword))
+})
+export default connect(mapState, mapDispatch)(SignUp);

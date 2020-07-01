@@ -3,7 +3,7 @@ import React from 'react';
 import { ReactComponent as CloseSvg } from '../../svgicon/cross.svg';
 import './position-item.styles.scss';
 
-const PositionItem = ({name, totalVotes}) =>(
+const PositionItem = ({ name, totalVotes }) => (
     <div className='position-item'>
         <div className='position-name'>
             <span>{name}</span>

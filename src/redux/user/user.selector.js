@@ -26,7 +26,18 @@ export const selectErrorMessage = createSelector(
     [selectUser],
     user => user.errorMessage
 );
+
 export const selectIsFetching = createSelector(
     [selectUser],
     user => user.isFetching
+);
+
+export const selectIsSignInBtnDisabled = createSelector(
+    [selectUser],
+    user => user.isSignInBtnDisabled
+);
+
+export const selectIsSignUpBtnDisabled = createSelector(
+    [selectUser],
+    user => user.isSignUpBtnDisabled
 );
