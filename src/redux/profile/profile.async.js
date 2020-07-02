@@ -1,6 +1,20 @@
-import { db } from '../firebase.utils';
+import { db, storage } from '../firebase.utils';
 import { singleFetcher } from "../async.utils";
-import { fetchUserEventsStart, fetchUserEventsSuccess, profileActionFailure, fetchUserPositionsStart, fetchUserPositionsSuccess, fetchUserNomineesSuccess, fetchUserNomineesStart } from './profile.actions';
+import {
+	fetchUserEventsStart,
+	fetchUserEventsSuccess,
+	profileActionFailure,
+	fetchUserPositionsStart,
+	fetchUserPositionsSuccess,
+	fetchUserNomineesSuccess,
+	fetchUserNomineesStart,
+	addUserEventStart,
+	addUserEventSuccess,
+	updateAddEventProgress
+} from './profile.actions';
+import {
+	toggleAddModal
+} from '../modal/modal.actions';
 
 export const fetchUserEventsAsync = (userId) => (
 	singleFetcher(
@@ -60,3 +74,46 @@ export const fetchUserNomineesAsync = (userId, eventId, positionId) => (
 		}
 	}
 );
+
+export const addEventAsync = (userId, eventName, file, date) => (
+	async dispatch => {
+		dispatch(addUserEventStart());
+		try {
+
+			if (file.size / 1000 > 350) {
+				throw new Error('Please upload an image less than 350Kb');
+			}
+			var fileName = file.name.toLowerCase();
+			if (!(fileName.endsWith('jpg') || fileName.endsWith('png')) || fileName.endsWith('jpeg')) {
+				throw new Error('Please upload an accepted file format');
+			}
+			var eventImgRef = storage.ref().child(`events/${new Date().getTime()}${file.name}`);
+			var uploadTask = eventImgRef.put(file);
+
+			var unsubscribe = uploadTask.on('state_changed', (snapshot) => {
+				var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				dispatch(updateAddEventProgress(progress));
+				console.log(`Upload is ${progress}% done`);
+			}, error => {
+				console.log('error');
+				dispatch(profileActionFailure(error));
+			}, async () => {
+				const downloadUrl = await uploadTask.snapshot.ref.getDownloadURL();
+				const newEvent = {
+					userId: userId,
+					imageUrl: downloadUrl,
+					start_at: new Date(),
+					end_at: date,
+					name: eventName
+				}
+				const eSnapshot = await db.collection('events').add(newEvent);
+
+				dispatch(addUserEventSuccess({ ...newEvent, id: eSnapshot.id }));
+				dispatch(toggleAddModal());
+				unsubscribe();
+			});
+		} catch (error) {
+			dispatch(profileActionFailure(error));
+		}
+	}
+)

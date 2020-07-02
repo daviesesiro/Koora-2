@@ -8,7 +8,7 @@ import {selectCurrentUser } from '../../redux/user/user.selector';
 
 import { ReactComponent as HomeSvg } from '../../svgicon/home.svg';
 import { ReactComponent as EventSvg } from '../../svgicon/server.svg';
-import { ReactComponent as PlaceSvg } from '../../svgicon/map.svg';
+// import { ReactComponent as PlaceSvg } from '../../svgicon/map.svg';
 import { ReactComponent as AboutSvg } from '../../svgicon/info.svg';
 import { ReactComponent as UserSvg } from '../../svgicon/user.svg';
 
@@ -25,7 +25,7 @@ const MobileNav = ({ toggleSignSignOut, currentUser }) => (
         <div className='nav bottom-nav'>
             <NavLink exact activeClassName='active-nav' className='logoSvg' to='/'><HomeSvg /></NavLink> 
             <NavLink activeClassName='active-nav' className='logoSvg' to='/events'><EventSvg /></NavLink> 
-            <NavLink exact activeClassName='active-nav' className='logoSvg' to='/place'><PlaceSvg /></NavLink> 
+            <NavLink activeClassName='active-nav' className='logoSvg' to='/about'><AboutSvg/></NavLink>     
             {                
                 !currentUser ?
                     <UserSvg className='logoSvg' onClick={() => toggleSignSignOut()}/>

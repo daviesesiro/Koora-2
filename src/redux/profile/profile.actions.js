@@ -40,7 +40,7 @@ export const addUserEventStart = () => ({
 })
 
 export const addUserEventSuccess = (event) => ({
-    type: profileActionTypes.ADD_USER_EVENT_START,
+    type: profileActionTypes.ADD_USER_EVENT_SUCCESS,
     payload: event
 })
 
@@ -49,7 +49,7 @@ export const addUserNomineeStart = () => ({
 })
 
 export const addUserNomineeSuccess = (nominee) => ({
-    type: profileActionTypes.ADD_USER_NOMINEE_START,
+    type: profileActionTypes.ADD_USER_NOMINEE_SUCCESS,
     payload: nominee
 })
 
@@ -60,4 +60,8 @@ export const addUserPositionStart = () => ({
 export const addUserPositionSuccess = (position) => ({
     type: profileActionTypes.ADD_USER_POSITION_SUCCESS,
     payload: position
+})
+export const updateAddEventProgress = (progress) => ({
+    type: profileActionTypes.UPDATE_ADD_EVENT_PROGRESS,
+    payload: progress
 })

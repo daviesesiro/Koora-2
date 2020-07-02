@@ -12,7 +12,8 @@ const INITIAL_STATE = {
         data:[]
     },
     isFetching: false,
-    isAddEventBtnDisabled:false,
+    isAddEventBtnDisabled: false,
+    addEventProgress: 0,
     errorMessage: null
 }
 
@@ -47,12 +48,25 @@ export const profileReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isFetching: false,
+                isAddEventBtnDisabled: false,
                 errorMessage: action.payload
             };
         case profileActionTypes.ADD_USER_EVENT_START:
             return {
                 ...state,
                 isAddEventBtnDisabled: true
+            }
+        case profileActionTypes.ADD_USER_EVENT_SUCCESS:
+            return {
+                ...state,
+                isAddEventBtnDisabled: false,
+                events: [...state.events, action.payload],
+                addEventProgress: 0
+            }
+        case profileActionTypes.UPDATE_ADD_EVENT_PROGRESS:
+            return {
+                ...state,
+                addEventProgress: action.payload,
             }
         case pofileActionTypes.CLEAR_PROFILE_DATA:        
             return {

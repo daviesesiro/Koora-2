@@ -31,3 +31,7 @@ export const selectIsFetching = createSelector(
     [selectProfile],
     profile => profile.isFetching
 );
+export const selectAddEventProgress = createSelector(
+    [selectProfile],
+    profile => profile.addEventProgress
+);
