@@ -8,7 +8,6 @@
     border: 3px dotted #2bace2;
     position: relative;
     
-
     .img-container{
         width: 100%;
         height: 100%;
@@ -30,15 +29,15 @@
     }
     .card-bottom{
         display: flex;
+        align-items: center;
         justify-content: space-between;
         width: 100%;
         background-color:#b3e5fc;
     }
     .nominee-name{
-        font-size: 1.5rem;
-        transition: 1s all;     
-        flex: 1;
-        text-align: center;  
+        font-size: 1.1rem;
+        padding-left: 1rem;
+        transition: 1s all; 
     }
 
     button{
@@ -67,3 +66,42 @@
         opacity: 0.8;
     }
 }
+
+    .voting-loader{
+        display: none;
+        position: absolute;
+        top: 10px;
+        width: 100%;
+        background: rgb(14,83,147);
+        background: linear-gradient(98deg, #ad1457 20%, rgb(81, 172, 214) 89%); 
+        transform-origin: left;
+        height: 2px;
+        transform: scaleX(0);
+        position: relative;
+        animation: votingAnimation .8s cubic-bezier(0.6, -0.28, 0.735, 0.045) infinite;
+        &::after{
+            position: absolute;
+            color: white;
+            right: 40%;
+            top: -10px;
+            content:'.';
+            font-size: 14px;
+            width: 3rem;
+            transform: scaleY(.34);
+            background-color: #ad1457;
+            box-shadow: 0px 1px 20px 10px rgba(18, 34, 173, 0.452);
+        }
+        @keyframes votingAnimation {
+            0%, 100%{
+                transform: scaleX(.2) translate(0);
+            }
+            50%{
+                transform: scaleX(.4) translateX(50%);
+                opacity: 0.1;
+            }
+            70%{
+                transform: scale(.5) translate(80%);
+                opacity: 0.7;
+            }
+        }
+    }

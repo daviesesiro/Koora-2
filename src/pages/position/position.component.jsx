@@ -15,7 +15,6 @@ class PositionsPage extends React.Component{
     componentDidMount() {
         const { fetchPositionsAsync, match } = this.props;
         const eventId = match.params.eventId;
-        console.log(eventId);
         fetchPositionsAsync(eventId);
     }
 
@@ -35,9 +34,7 @@ class PositionsPage extends React.Component{
                     <div className='position-items'>
                         {
                             positions&&positions.map(({ id, ...otherProps }) => (
-                                <Link key={id} to={`${match.url}/${id}`}>
-                                    <PositionItem {...otherProps} />
-                                </Link>
+                                <PositionItem url={`${match.url}/${id}`} {...otherProps} key={id} />
                             ))
                         }
                     </div>

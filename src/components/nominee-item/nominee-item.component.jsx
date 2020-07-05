@@ -15,6 +15,7 @@ const NomineeItem = ({ nominee: { votes, name, id, }, handleVote=()=>{return nul
                 <div className='nominee-name'>{name}</div>
                 <Button1 onClick={(e)=>handleVote(id,e)}>Vote</Button1>
             </div>
+            <span className='voting-loader'>i</span>
         </div>
     );
 }

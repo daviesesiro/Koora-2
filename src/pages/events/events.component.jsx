@@ -46,15 +46,13 @@ class EventsPage extends React.Component{
                     </div>    
                     {(isFetching)? <Spinner />
                     :
-                        <div className='event-items'>
+                        <div className='events-items'>
                             {
-                                events && events.map(({ id, ...otherProps }) => {
-                                    return(
-                                        <Link to={`${match.path}/${id}`} key={id} >
-                                            <EventItem {...otherProps} />
-                                        </Link>)
-                                })
+                                events && events.map(({ id, ...otherProps }) => (
+                                    <EventItem key={id} url={`${match.path}/${id}`} {...otherProps}/>
+                                ))
                             }
+                            
                         </div>                    
                     }
                 </div>

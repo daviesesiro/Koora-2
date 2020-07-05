@@ -65,3 +65,12 @@ export const updateAddEventProgress = (progress) => ({
     type: profileActionTypes.UPDATE_ADD_EVENT_PROGRESS,
     payload: progress
 })
+
+export const deletePositionStart = () => ({
+    type: profileActionTypes.DELETE_POSITION_START
+})
+
+export const deletePositionSuccess = (id) => ({
+    type: profileActionTypes.DELETE_POSITION_SUCCESS,
+    payload: id
+})

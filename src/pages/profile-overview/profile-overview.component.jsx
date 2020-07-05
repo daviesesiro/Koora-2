@@ -9,7 +9,6 @@ import { SignOutUserAsync } from '../../redux/user/user.async';
 import { toggleAddModal } from '../../redux/modal/modal.actions';
 import { selectAddModal } from '../../redux/modal/modal.selector';
 
-import { Link } from 'react-router-dom';
 import Button2 from '../../components/button/button2.component';
 import EventForm from '../../components/event-form/event-form.component';
 import Spinner from '../../components/spinner/spinner.component';
@@ -59,20 +58,17 @@ class ProfileOverview extends React.Component {
                     </div>
                     <hr/><hr/>
                     <h3 className='sub-head'>These are your events</h3>
+                    <hr/><hr/>
                 </div>
 
-                <div className="event-items-container">
                     {(isFetching) ? <Spinner />
                         :
                         <div className='event-items'>
                             {events&&events.map(({ id, ...otherProps }) => (
-                                <Link key={id} to={`${match.path}/${id}`}>
-                                    <EventItem {...otherProps} />
-                                </Link>
+                                <EventItem key={id} url={`${match.path}/${id}`} {...otherProps} />
                             ))}
                         </div>                    
-                    }
-                </div>                    
+                    }                
                 
             </div>
             );

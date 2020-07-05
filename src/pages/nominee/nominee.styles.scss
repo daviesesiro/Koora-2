@@ -1,17 +1,18 @@
 .nominee-page{
     background-color: rgb(22, 25, 36);
-    height: 100%;
     position: relative;
     padding-top: 1rem;
     @media screen and (max-width:800px){
         padding: 4rem 0 5rem 0;
     }
+
+
     .nav-back{
         position: absolute;
         width: 3rem;
         left: 1rem;
         fill: #2bace2;
-        flex: 1 1;
+        z-index: 20;
         cursor: pointer;    
         transition: .2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
         &:hover{

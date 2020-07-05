@@ -1,7 +1,7 @@
 .events-page{
     background-color: white;
     height: 100%;
-    padding: 0rem 2rem 0rem 2rem;
+    // padding: 0rem 2rem 0rem 2rem;
 
     @media screen and (max-width: 800px){
         padding:1rem;
@@ -30,11 +30,18 @@
     width: 3rem;
     margin-top: 2rem;
     margin-left: auto;
+    margin-right: 2rem;
     display: block;
+    fill: red;
+    transition: .4s ease-in-out;
+
+    &:hover{
+        transform: rotate(180deg);
+    }
 }
 .search{
     margin-top: 0rem;
-    
+    margin-left: 2rem;
     input,
     input:focus,
     input:active{
@@ -49,26 +56,29 @@
     
 }
 
-.event-items{
+.events-items{
+    max-width: 70rem;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 4rem 2rem;
-    grid-auto-rows: minmax(400px, auto);
+    grid-template-columns: repeat(auto-fit,minmax(20rem,20rem));
+    grid-auto-columns: 20rem;
+    margin: 0 auto 2rem;
+    justify-content: center;
+    grid-auto-rows: auto;
+    gap: 3rem 2rem;
 
-    @media screen and (max-width:1024px) {
-        gap: 4rem 2rem;
-        grid-template-columns: repeat(2, 1fr);
+    @media screen and (max-width:800px) {
+        gap: 2rem;     
     }
 
     @media screen and (max-width:600px){
-        grid-template-columns:1fr;
+        grid-template-columns: repeat(auto-fit,minmax(20rem,25rem));
+        grid-auto-rows: auto;
         gap:3rem 1.5rem;
-        padding: 0rem 1rem;
+        // padding: 0rem 4rem;
     }
     @media screen and (max-width:350px){
-        grid-auto-rows: minmax(60vh, auto);
-        grid-template-columns: 1fr;
-        gap:3rem 1.5rem;
+        grid-auto-rows: auto;
+        gap:3rem;
     }
 
     & > *{

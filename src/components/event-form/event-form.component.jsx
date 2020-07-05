@@ -51,16 +51,25 @@ export const EventForm = ({currentUser, isAddEventBtnDisabled, addEventAsync, ad
                     onChange={handleFile}
                     className='file'
                     type='file'
-                    required
                 />
+                <label htmlFor="end-at">*Event ending:</label>
                 <input
+                    name='end-at'
                     className='date'
                     type='datetime-local'
                     onChange={handleDate}
                 />
                 <br />
-                <Button2 type='button' size='big1' color='red' handleClick={() => handleFileButton()}>Upload Image</Button2>
-                <span className='file-name'>{file && file.name}</span>
+                <label htmlFor="end-at">*Upload Event Cover:</label>
+                <br />
+                <Button2
+                    type='button'
+                    size='big1'
+                    color='red'
+                    handleClick={handleFileButton}>
+                    Upload Image
+                </Button2>
+                <span style={{ textAlign: 'center', display: 'block' }} className='file-name'>{file && file.name}</span>
                 <div className='submit'>
                     <Button2 disabled={isAddEventBtnDisabled}
                         className='submit'
@@ -76,15 +85,15 @@ export const EventForm = ({currentUser, isAddEventBtnDisabled, addEventAsync, ad
         </div>
     )
 }
-const mapState = createStructuredSelector({
+const mapStateToProps = createStructuredSelector({
     isAddEventBtnDisabled: selectIsAddEventBtnDisabled,
     currentUser: selectCurrentUser,
     addEventProgress: selectAddEventProgress,
     errorMessage: selectErrorMessage
 });
 
-const mapDispatch = dispatch => ({
+const mapDispatchToProps = dispatch => ({
     addEventAsync: (userId, eventName, file, date) => dispatch(addEventAsync(userId, eventName, file, date))
-})
+});
 
-export default connect(mapState, mapDispatch)(EventForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EventForm);

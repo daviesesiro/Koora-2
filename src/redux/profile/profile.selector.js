@@ -27,6 +27,15 @@ export const selectIsAddEventBtnDisabled = createSelector(
     profile => profile.isAddEventBtnDisabled
 );
 
+export const selectIsAddPositionBtnDisabled = createSelector(
+    [selectProfile],
+    profile => profile.isAddPositionBtnDisabled
+);
+export const selectIsAddNomineeBtnDisabled = createSelector(
+    [selectProfile],
+    profile => profile.isAddNomineeBtnDisabled
+);
+
 export const selectIsFetching = createSelector(
     [selectProfile],
     profile => profile.isFetching

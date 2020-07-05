@@ -10,7 +10,10 @@ import {
 	fetchUserNomineesStart,
 	addUserEventStart,
 	addUserEventSuccess,
-	updateAddEventProgress
+	updateAddEventProgress,
+	addUserPositionStart,
+	addUserPositionSuccess,
+	deletePositionSuccess
 } from './profile.actions';
 import {
 	toggleAddModal
@@ -35,7 +38,6 @@ export const fetchUserPositionsAsync = (userId, eventId) => (
 				.where('userId', '==', `${userId}`).get();
 			const eSnapshot = await db.doc(`events/${eventId}`).get();
 			const createdBy = eSnapshot.exists ? eSnapshot.data().userId : null;
-			console.log(eSnapshot.exists);
 			dispatch(fetchUserPositionsSuccess({
 				createdBy: createdBy,
 				data: pSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
@@ -79,7 +81,9 @@ export const addEventAsync = (userId, eventName, file, date) => (
 	async dispatch => {
 		dispatch(addUserEventStart());
 		try {
-
+			if (!eventName || !file || !date) {
+				throw new Error('Please fill up the form')
+			}
 			if (file.size / 1000 > 350) {
 				throw new Error('Please upload an image less than 350Kb');
 			}
@@ -93,9 +97,7 @@ export const addEventAsync = (userId, eventName, file, date) => (
 			var unsubscribe = uploadTask.on('state_changed', (snapshot) => {
 				var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 				dispatch(updateAddEventProgress(progress));
-				console.log(`Upload is ${progress}% done`);
 			}, error => {
-				console.log('error');
 				dispatch(profileActionFailure(error));
 			}, async () => {
 				const downloadUrl = await uploadTask.snapshot.ref.getDownloadURL();
@@ -115,5 +117,38 @@ export const addEventAsync = (userId, eventName, file, date) => (
 		} catch (error) {
 			dispatch(profileActionFailure(error));
 		}
+	}
+)
+
+export const addPositionAsync = ({ userId, eventId, positionName }) => (
+	async dispatch => {
+		dispatch(addUserPositionStart())
+		try {
+			if (!userId || !eventId || !positionName) {
+				throw new Error("Please fill up the fields")
+			}
+			const totalVotes = 0;
+			const newPosition = { name: positionName, userId, eventId, totalVotes }
+			const pSnapshot = await db.collection('positions').add(newPosition);
+			dispatch(addUserPositionSuccess({ ...newPosition, id: pSnapshot.id }));
+			dispatch(toggleAddModal());
+		} catch (error) {
+			dispatch(profileActionFailure(error))
+		}
+
+	}
+)
+
+export const deletePositionAsync = (id) => (
+	async dispatch => {
+		let success = true;
+		try {
+			await db.collection('positions').doc(id).delete();
+			dispatch(deletePositionSuccess(id));
+		} catch (error) {
+			dispatch(profileActionFailure(error))
+			success = false;
+		}
+		return success;
 	}
 )

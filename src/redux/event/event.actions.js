@@ -23,3 +23,17 @@ export const setNomineesSuccess = (nominees) => ({
     type: eventActionTypes.SET_NOMINEES_SUCCESS,
     payload: nominees
 });
+
+export const voteNomineeStart = () => ({
+    type: eventActionTypes.VOTE_NOMINEE_START
+})
+
+export const voteNomineeSuccess = (nomineeId) => ({
+    type: eventActionTypes.VOTE_NOMINEE_SUCCESS,
+    payload: nomineeId
+})
+
+export const voteNomineeFailure = (error) => ({
+    type: eventActionTypes.VOTE_NOMINEE_FAILURE,
+    payload: error.message
+})
