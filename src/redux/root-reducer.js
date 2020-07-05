@@ -10,7 +10,7 @@ import modalReducer from './modal/modal.reducer';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: []
+    whitelist: ['events']
 }
 
 const rootReducer = combineReducers({

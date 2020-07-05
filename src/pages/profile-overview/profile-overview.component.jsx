@@ -21,7 +21,7 @@ class ProfileOverview extends React.Component {
 
     componentDidMount() {
         const { currentUser, fetchUserEventsAsync, events } = this.props;
-        document.title = `Koora | ${currentUser.email}`;
+        document.title = `Koora | Profile | ${currentUser.email}`;
         
         if(events.length===0){
             fetchUserEventsAsync(currentUser.userId);

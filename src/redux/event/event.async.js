@@ -13,9 +13,11 @@ import { toast } from "react-toastify";
 import { toggleSignInSignUp } from "../modal/modal.actions";
 import { db } from "../firebase.utils";
 
-export const fetchEventsAsync = () =>
-    fetcher(fetchStart, "events", setEventsSuccess, fetchFailure);
-
+export const fetchEventsAsync = () => {
+    return (
+        fetcher(fetchStart, "events", setEventsSuccess, fetchFailure)
+    );
+}
 export const fetchPositionsAsync = (eventId) => {
     return async dispatch => {
         //this will make the spinner show on the page
@@ -40,7 +42,7 @@ export const fetchNomineesAsync = (eventId, positionId) => {
         db.collection('events').doc(eventId).get().then((eSnapshot) => {
             const eventName = eSnapshot.data().name;
 
-            document.title = `Koora | ${eventName} | ${positionName} Nominees`
+            document.title = `Koora | ${eventName} Event | ${positionName} Nominees`
         })
     })
     return single2Fetcher(

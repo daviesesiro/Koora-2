@@ -7,7 +7,6 @@ export const fetcher = (start, collection, setter, fail) => (
         try {
             //getting the collection from db
             const snapshot = await db.collection(collection).get();
-            document.title = `Koora | ${collection}`
             // passing the data to the store
             dispatch(setter(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))));
         } catch (error) {

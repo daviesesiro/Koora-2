@@ -10,9 +10,16 @@ import Spinner from '../../components/spinner/spinner.component';
 import FormInput from '../../components/form-input/form-input.component';
 import EventItem from '../../components/event-item/event-item.component';
 import './events.styles.scss';
+
 class EventsPage extends React.Component{
-    state = {
-        searchField: ''
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            searchField: ''
+        }
+
+        document.title = 'Koora | Events'
     }
 
     componentDidMount() {
