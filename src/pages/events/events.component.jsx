@@ -10,7 +10,6 @@ import Spinner from '../../components/spinner/spinner.component';
 import FormInput from '../../components/form-input/form-input.component';
 import EventItem from '../../components/event-item/event-item.component';
 import './events.styles.scss';
-import { Link } from 'react-router-dom';
 class EventsPage extends React.Component{
     state = {
         searchField: ''

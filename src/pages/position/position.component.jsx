@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { Link } from 'react-router-dom';
 
 import { selectPositions, selectIsFetching } from '../../redux/event/event.selector';
 import { fetchPositionsAsync } from '../../redux/event/event.async';

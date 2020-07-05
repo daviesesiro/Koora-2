@@ -13,7 +13,9 @@ import {
 	updateAddEventProgress,
 	addUserPositionStart,
 	addUserPositionSuccess,
-	deletePositionSuccess
+	deletePositionSuccess,
+	addUserNomineeSuccess,
+	addUserNomineeStart
 } from './profile.actions';
 import {
 	toggleAddModal
@@ -29,27 +31,29 @@ export const fetchUserEventsAsync = (userId) => (
 		profileActionFailure
 	)
 );
-export const fetchUserPositionsAsync = (userId, eventId) => (
+export const fetchUserPositionsAsync = ({ currentUser: { userId, email }, eventId }) => (
 	async dispatch => {
 		dispatch(fetchUserPositionsStart());
 		try {
+			const eSnapshot = await db.doc(`events/${eventId}`).get();
+			const eventName = eSnapshot.exists ? eSnapshot.data().name : null;
+			document.title = `Koora | ${email} | ${eventName} Positions`;
 			const pSnapshot = await db.collection('positions')
 				.where('eventId', '==', `${eventId}`)
 				.where('userId', '==', `${userId}`).get();
-			const eSnapshot = await db.doc(`events/${eventId}`).get();
 			const createdBy = eSnapshot.exists ? eSnapshot.data().userId : null;
 			dispatch(fetchUserPositionsSuccess({
-				createdBy: createdBy,
+				createdBy,
+				eventName,
 				data: pSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 			}));
-			return 'done';
 		} catch (error) {
 			dispatch(profileActionFailure(error))
 		}
 	}
 );
 
-export const fetchUserNomineesAsync = (userId, eventId, positionId) => (
+export const fetchUserNomineesAsync = ({ userId, eventId, positionId }) => (
 	async dispatch => {
 		dispatch(fetchUserNomineesStart());
 		try {
@@ -65,9 +69,11 @@ export const fetchUserNomineesAsync = (userId, eventId, positionId) => (
 			const eMp = exists ? eSnapshot.data().userId === pSnapshot.data().userId : false;
 			//setting createdBy
 			const createdBy = eMp ? eSnapshot.data().userId : null;
+			const positionName = eMp ? pSnapshot.data().name : null;
 
 			dispatch(fetchUserNomineesSuccess({
-				createdBy: createdBy,
+				createdBy,
+				positionName,
 				data: nSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
 			}));
 			return 'done';
@@ -136,6 +142,70 @@ export const addPositionAsync = ({ userId, eventId, positionName }) => (
 			dispatch(profileActionFailure(error))
 		}
 
+	}
+);
+
+export const addNomineeAsync = ({ nomineeName, userId, positionId, eventId, file }) => (
+	async dispatch => {
+		dispatch(addUserNomineeStart());
+		try {
+			if (!nomineeName) {
+				throw new Error('Please fill up the form')
+			}
+			if (file && (file.size / 1000 > 350)) {
+				throw new Error('Please upload an image less than 350Kb');
+			}
+			var downloadUrl = ''; var newNominee;
+			if (!file) {
+				downloadUrl = '/bitmap.png';
+				newNominee = {
+					createdBy: userId,
+					userId,
+					imageUrl: downloadUrl,
+					name: nomineeName,
+					positionId,
+					eventId,
+					votes: 0
+				}
+				const nSnapshot = await db.collection('nominees').add(newNominee);
+
+				dispatch(addUserNomineeSuccess({ ...newNominee, id: nSnapshot.id }));
+				return dispatch(toggleAddModal());
+			}
+
+			var fileName = file.name.toLowerCase();
+
+			if (!(fileName.endsWith('jpg') || fileName.endsWith('png')) || fileName.endsWith('jpeg')) {
+				throw new Error('Please upload an accepted file format');
+			}
+
+			var nomineeImgRef = storage.ref().child(`nominees/${new Date().getTime()}${file.name}`);
+			var uploadTask = nomineeImgRef.put(file);
+
+			var unsubscribe = uploadTask.on('state_changed', (snapshot) => (
+				null
+			), error => {
+				dispatch(profileActionFailure(error));
+			}, async () => {
+				downloadUrl = await uploadTask.snapshot.ref.getDownloadURL();
+				newNominee = {
+					userId: userId,
+					imageUrl: downloadUrl,
+					name: nomineeName,
+					positionId,
+					eventId,
+					votes: 0
+				}
+				const nSnapshot = await db.collection('nominees').add(newNominee);
+
+				dispatch(addUserNomineeSuccess({ ...newNominee, createdBy: userId, id: nSnapshot.id }));
+				dispatch(toggleAddModal());
+				unsubscribe();
+			});
+
+		} catch (error) {
+			dispatch(profileActionFailure(error));
+		}
 	}
 )
 

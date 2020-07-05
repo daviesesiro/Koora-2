@@ -5,10 +5,12 @@ const INITIAL_STATE = {
     events: [],
     positions: {
         createdBy: null,
+        eventName:null,
         data:[]
     },
     nominees: {
         createdBy: null,
+        positionName: null,
         data:[]
     },
     isFetching: false,
@@ -38,13 +40,21 @@ export const profileReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 isFetching: false,
-                positions: { createdBy:action.payload.createdBy, data: action.payload.data }
+                positions: {
+                    createdBy: action.payload.createdBy,
+                    eventName: action.payload.eventName,
+                    data: action.payload.data
+                }
             };
         case pofileActionTypes.FETCH_USER_NOMINEES_SUCCESS:   
             return {
-                ...state,
+                ...state,                
                 isFetching: false,
-                nominees: { createdBy:action.payload.createdBy, data: action.payload.data }
+                nominees: {
+                    positionName: action.payload.positionName,
+                    createdBy: action.payload.createdBy,
+                    data: action.payload.data
+                }
             };
         case pofileActionTypes.PROFILE_ACTION_FAILURE:        
             return {
@@ -52,6 +62,7 @@ export const profileReducer = (state = INITIAL_STATE, action) => {
                 isFetching: false,
                 isAddEventBtnDisabled: false,
                 isAddPositionBtnDisabled: false,
+                isAddNomineeBtnDisabled: false,
                 errorMessage: action.payload
             };
         case profileActionTypes.ADD_USER_EVENT_START:
@@ -84,8 +95,9 @@ export const profileReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 isAddNomineeBtnDisabled: false,
                 nominees: {
+                    positionName: state.nominees.positionName,
                     createdBy: action.payload.createdBy,
-                    data: [...state.nominees.data, ...action.payload.data]
+                    data: [...state.nominees.data, action.payload]
                 }
             }
         case profileActionTypes.DELETE_POSITION_SUCCESS:

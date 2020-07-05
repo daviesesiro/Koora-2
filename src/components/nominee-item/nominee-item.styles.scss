@@ -4,7 +4,8 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    border-radius: 5px;
+    overflow: hidden;
+    border-radius: 8px;
     border: 3px dotted #2bace2;
     position: relative;
     
@@ -14,9 +15,8 @@
         overflow: hidden;
     }
     .nominee-img{
-        background: url('/user.jpg');
-        background-size: cover;
         background-position: center;
+        background-size: cover;
         height: 100%;
         width: 100%;
         transition: .8s;
@@ -29,10 +29,16 @@
     }
     .card-bottom{
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        flex-direction: column;
         width: 100%;
         background-color:#b3e5fc;
+    }
+    .top{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
     }
     .nominee-name{
         font-size: 1.1rem;
@@ -56,28 +62,28 @@
     }
 
     .nominee-votes{
-        position: absolute;
-        top: 50%;
-        left:2rem;
-        font-size: 2rem;
-        color: white;
+        text-align: center;
+        font-size: 1rem;
+        display: block;
+        color: rgb(255, 255, 255);
+        background-color: #768a92;
+        width: 100%;
         font-family: 'Orbitron', sans-serif;
-        transform: scale(2);
-        opacity: 0.8;
+        border-top: 3px dotted #2bace2;
     }
 }
 
     .voting-loader{
         display: none;
+        height: 4px;
         position: absolute;
         top: 10px;
         width: 100%;
         background: rgb(14,83,147);
         background: linear-gradient(98deg, #ad1457 20%, rgb(81, 172, 214) 89%); 
         transform-origin: left;
-        height: 2px;
         transform: scaleX(0);
-        position: relative;
+        // position: relative;
         animation: votingAnimation .8s cubic-bezier(0.6, -0.28, 0.735, 0.045) infinite;
         &::after{
             position: absolute;
@@ -97,7 +103,6 @@
             }
             50%{
                 transform: scaleX(.4) translateX(50%);
-                opacity: 0.1;
             }
             70%{
                 transform: scale(.5) translate(80%);

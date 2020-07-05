@@ -25,7 +25,7 @@ class ProfilePositionPage extends React.Component{
 
     componentDidMount() {
         const { fetchUserPositionsAsync, currentUser, match } = this.props;
-        fetchUserPositionsAsync(currentUser.userId, match.params.eventId);
+        fetchUserPositionsAsync({currentUser,eventId: match.params.eventId});
     }
     render() {
         const {
@@ -40,8 +40,11 @@ class ProfilePositionPage extends React.Component{
             addPositionAsync,
             deletePositionAsync
         } = this.props;
+        
         const isOwner = (positions.createdBy === currentUser.userId)
+
         const { showDelete } = this.state;
+
         if (isFetching) return <Spinner />
         return (
             <div className='profile-position'>
@@ -56,7 +59,7 @@ class ProfilePositionPage extends React.Component{
                 </Modal>
                 <div className='top-content'>
                     <Link to='/profile'> <NavBack className='nav-back'/> </Link>
-                    <h1 className='p-position-event-name'>Positions</h1>
+                    <h1 className='p-position-event-name'>{positions.eventName} Positions</h1>
                 </div>
                 {isOwner ?
                     <div className='btn-container'>
@@ -104,7 +107,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchUserPositionsAsync: (userId, eventId) => dispatch(fetchUserPositionsAsync(userId, eventId)),
+    fetchUserPositionsAsync: (data) => dispatch(fetchUserPositionsAsync(data)),
     toggleAddModal: () => dispatch(toggleAddModal()),
     addPositionAsync: (data) => dispatch(addPositionAsync(data)),
     deletePositionAsync: (id)=> dispatch(deletePositionAsync(id))
