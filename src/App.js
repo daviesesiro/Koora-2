@@ -12,7 +12,7 @@ import HomePage from "./pages/home/home.component";
 import EventPage from "./pages/event/event.component";
 import ProfilePage from "./pages/profile/profile.component";
 import Spinner from "./components/spinner/spinner.component";
-import { SignInSignUp } from "./components/SignIn-SignUp/SignIn-SignUp.component";
+import SignInSignUp from "./components/SignIn-SignUp/SignIn-SignUp.component";
 import Nav from "./components/nav/nav.component";
 
 import "./App.scss";
