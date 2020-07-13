@@ -1,4 +1,4 @@
-import React, { createRef, createElement } from 'react'
+import React, { createRef } from 'react'
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import ReactCrop from 'react-image-crop';
@@ -49,7 +49,8 @@ class EventForm extends React.Component {
     }
     
     handleSubmit = (e) => {
-        const { currentUser, addEventAsync, eventName, newFile, date } = this.state;
+        const { currentUser, addEventAsync, } = this.props;
+        const { eventName, newFile, date } = this.state;
         e.preventDefault();
         addEventAsync(currentUser.userId, eventName, newFile, date);
     }
@@ -78,6 +79,7 @@ class EventForm extends React.Component {
             <div className='event-form'>
                 <form onSubmit={this.handleSubmit}>
                     <p style={{ color: 'red', textAlign: 'center' }}>{errorMessage}</p>
+                    {}
                     <FormInput
                         required
                         name='name'
@@ -96,7 +98,7 @@ class EventForm extends React.Component {
                         name='end-at'
                         className='date'
                         type='datetime-local'
-                        onChange={(e) => this.setState({file:e.target.value})}
+                        onChange={(e) => this.setState({date:e.target.value})}
                     />
                     <br />
                     <label htmlFor="end-at">*Upload Event Cover:</label>

@@ -87,6 +87,7 @@ export const addEventAsync = (userId, eventName, file, date) => (
 	async dispatch => {
 		dispatch(addUserEventStart());
 		try {
+			console.table(userId, eventName, file, date)
 			if (!eventName || !file || !date) {
 				throw new Error('Please fill up the form')
 			}
